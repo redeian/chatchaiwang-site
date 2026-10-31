@@ -55,9 +55,8 @@ NAME_TH = "ชัชชัย หวังวิวัฒนา"
 # --------------------------------------------------------------------- data
 STATS = [
     ("18", "peer-reviewed publications", "2015 to 2026"),
-    ("76", "training and speaking programmes", "since 2018"),
+    ("75", "training and speaking programmes", "since 2018"),
     ("20+", "software systems built in house", "at the university, running today"),
-    ("80%", "below the vendor quote", "in-house build at the university"),
 ]
 
 FOCUS = [
@@ -71,7 +70,7 @@ FOCUS = [
     ),
     (
         "Capability building",
-        "Seventy-six programmes since 2018. It counts only if they can run it without me.",
+        "Seventy-five programmes since 2018. It counts only if they can run it without me.",
     ),
 ]
 
@@ -297,7 +296,6 @@ SPEAKING = {
         ("Instructor, AI Training", "Generali Life Assurance (Thailand)", "Jan 2026"),
     ],
     "2025": [
-        ("Speaker, Apple Distinguished Educator South East Asia", "Apple Inc.", "Nov 2025"),
         ("Instructor, AI Champion Support Practitioner (Round 2)", "University of the Thai Chamber of Commerce", "Oct 2025"),
         ("Instructor, AI Champion Support Practitioner (Round 1)", "University of the Thai Chamber of Commerce", "Oct 2025"),
         ("Instructor, AI Practitioner (Round 2)", "University of the Thai Chamber of Commerce", "Oct 2025"),
@@ -603,16 +601,16 @@ p{margin:0 0 1em}
 }
 
 /* stats */
-.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border-bottom:1px solid var(--line)}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border-bottom:1px solid var(--line)}
 .stat{padding:26px 0;border-right:1px solid var(--line)}
 .stat:last-child{border-right:0}
 .stat b{display:block;font-family:var(--serif);font-size:34px;line-height:1;font-weight:400}
 .stat span{display:block;font-size:12.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-top:8px}
 .stat i{display:block;font-style:normal;font-size:12px;color:var(--muted);margin-top:2px;opacity:.8}
 @media (max-width:720px){
-  .stats{grid-template-columns:1fr 1fr}
-  .stat{border-bottom:1px solid var(--line);padding:20px 0}
-  .stat:nth-child(2n){border-right:0}
+  .stats{grid-template-columns:1fr}
+  .stat{border-right:0;border-bottom:1px solid var(--line);padding:20px 0}
+  .stat:last-child{border-bottom:0}
   .stat b{font-size:26px}
 }
 
@@ -945,13 +943,13 @@ def llms_txt() -> str:
 
 > Technology executive and academic in Bangkok. Applied AI, data governance and
 > digital transformation for institutions that cannot afford to fail. Eighteen
-> peer-reviewed publications, seventy-six executive programmes since 2018.
+> peer-reviewed publications, seventy-five executive programmes since 2018.
 
 ## Pages
 
 - [Profile]({BASE}/): who he is, what he has delivered, and the record behind it.
 - [Publications]({BASE}/publications.html): eighteen peer-reviewed items, 2015 to 2026, with DOIs.
-- [Speaking]({BASE}/speaking.html): all seventy-six programmes since 2018, by year.
+- [Speaking]({BASE}/speaking.html): all seventy-five programmes since 2018, by year.
 - [ภาษาไทย]({BASE}/th/): the same profile written in Thai.
 
 ## Facts
@@ -1136,10 +1134,10 @@ def page_index() -> str:
     <div class="wrap section-grid">
       <p class="label">Teaching and speaking</p>
       <div>
-        <p style="max-width:38em;margin-bottom:22px;font-size:17px">Seventy-six programmes since 2018.
+        <p style="max-width:38em;margin-bottom:22px;font-size:17px">Seventy-five programmes since 2018.
         Selected clients include {e(CLIENTS)}.</p>
         <div class="rows">
-          <div class="row"><div class="t">Apple Distinguished Educator, South East Asia<small>Apple Inc.</small></div><div class="y">Nov 2025</div></div>
+          <div class="row"><div class="t">AI Transformation for Executives<small>Srithai Superware</small></div><div class="y">Aug 2025</div></div>
           <div class="row"><div class="t">Generative AI for Military Work<small>National Defence Studies Institute</small></div><div class="y">Mar 2026</div></div>
           <div class="row"><div class="t">AI and Data Driven Organization for Executives<small>Office of the Personal Data Protection Committee</small></div><div class="y">Jul 2025</div></div>
           <div class="row"><div class="t">Generative AI for Business<small>Krungthai Bank</small></div><div class="y">May 2024</div></div>
@@ -1276,9 +1274,8 @@ def page_speaking() -> str:
 # --------------------------------------------------------------- Thai profile
 TH_STATS = [
     ("18", "ผลงานตีพิมพ์ระดับนานาชาติ", "2015 ถึง 2026"),
-    ("76", "หลักสูตรอบรมและการบรรยาย", "ตั้งแต่ 2018"),
+    ("75", "หลักสูตรอบรมและการบรรยาย", "ตั้งแต่ 2018"),
     ("20+", "ระบบซอฟต์แวร์ที่สร้างเอง", "ใช้งานจริงในมหาวิทยาลัย"),
-    ("80%", "ต่ำกว่าราคาที่ผู้ขายเสนอ", "งานที่สร้างเองในมหาวิทยาลัย"),
 ]
 
 TH_FOCUS = [
@@ -1287,7 +1284,7 @@ TH_FOCUS = [
     ("ธรรมาภิบาลข้อมูล",
      "โครงการคุ้มครองข้อมูลที่คนในองค์กรทำตามได้จริง และแผนแม่บทให้หน่วยกำกับดูแลระดับประเทศ"),
     ("สร้างขีดความสามารถ",
-     "76 หลักสูตรตั้งแต่ 2018 นับว่าสำเร็จก็ต่อเมื่อคนของเขาทำเองได้โดยไม่ต้องมีผม"),
+     "75 หลักสูตรตั้งแต่ 2018 นับว่าสำเร็จก็ต่อเมื่อคนของเขาทำเองได้โดยไม่ต้องมีผม"),
 ]
 
 TH_BANDS = [
@@ -1504,7 +1501,7 @@ def page_index_th() -> str:
 </main>
 """
     desc = ("ผศ. ดร.ชัชชัย หวังวิวัฒนา ผู้เชี่ยวชาญด้าน AI และธรรมาภิบาลข้อมูล รองอธิการบดีฝ่ายเทคโนโลยี"
-            "สารสนเทศ มหาวิทยาลัยหอการค้าไทย ผลงานตีพิมพ์ 18 ชิ้น และหลักสูตรอบรม 76 หลักสูตร")
+            "สารสนเทศ มหาวิทยาลัยหอการค้าไทย ผลงานตีพิมพ์ 18 ชิ้น และหลักสูตรอบรม 75 หลักสูตร")
     alt = ('<link rel="alternate" hreflang="en" href="' + BASE + '/">\n'
            '<link rel="alternate" hreflang="th" href="' + BASE + '/th/">\n'
            '<link rel="alternate" hreflang="x-default" href="' + BASE + '/">\n')

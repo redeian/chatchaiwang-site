@@ -94,16 +94,16 @@ p{margin:0 0 1em}
 }
 
 /* stats */
-.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border-bottom:1px solid var(--line)}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border-bottom:1px solid var(--line)}
 .stat{padding:26px 0;border-right:1px solid var(--line)}
 .stat:last-child{border-right:0}
 .stat b{display:block;font-family:var(--serif);font-size:34px;line-height:1;font-weight:400}
 .stat span{display:block;font-size:12.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-top:8px}
 .stat i{display:block;font-style:normal;font-size:12px;color:var(--muted);margin-top:2px;opacity:.8}
 @media (max-width:720px){
-  .stats{grid-template-columns:1fr 1fr}
-  .stat{border-bottom:1px solid var(--line);padding:20px 0}
-  .stat:nth-child(2n){border-right:0}
+  .stats{grid-template-columns:1fr}
+  .stat{border-right:0;border-bottom:1px solid var(--line);padding:20px 0}
+  .stat:last-child{border-bottom:0}
   .stat b{font-size:26px}
 }
 
@@ -238,7 +238,7 @@ html[lang="th"] .hero h1{font-size:clamp(31px,4.2vw,52px);line-height:1.2;text-w
     </div>
   </div>
 
-  <div class="wrap"><div class="stats"><div class="stat"><b>18</b><span>peer-reviewed publications</span><i>2015 to 2026</i></div><div class="stat"><b>76</b><span>training and speaking programmes</span><i>since 2018</i></div><div class="stat"><b>20+</b><span>software systems built in house</span><i>at the university, running today</i></div><div class="stat"><b>80%</b><span>below the vendor quote</span><i>in-house build at the university</i></div></div></div>
+  <div class="wrap"><div class="stats"><div class="stat"><b>18</b><span>peer-reviewed publications</span><i>2015 to 2026</i></div><div class="stat"><b>75</b><span>training and speaking programmes</span><i>since 2018</i></div><div class="stat"><b>20+</b><span>software systems built in house</span><i>at the university, running today</i></div></div></div>
 
   <section style="padding:34px 0 30px">
     <div class="wrap">
@@ -252,7 +252,7 @@ html[lang="th"] .hero h1{font-size:clamp(31px,4.2vw,52px);line-height:1.2;text-w
   <section>
     <div class="wrap">
       <p class="label" style="margin-bottom:22px">Focus</p>
-      <div class="cards"><div class="card"><h3>Applied AI</h3><p>Language models that hold up outside a demo: assessment, service agents, manpower planning.</p></div><div class="card"><h3>Data governance</h3><p>Privacy programmes people can follow. Master planning for the national regulator.</p></div><div class="card"><h3>Capability building</h3><p>Seventy-six programmes since 2018. It counts only if they can run it without me.</p></div></div>
+      <div class="cards"><div class="card"><h3>Applied AI</h3><p>Language models that hold up outside a demo: assessment, service agents, manpower planning.</p></div><div class="card"><h3>Data governance</h3><p>Privacy programmes people can follow. Master planning for the national regulator.</p></div><div class="card"><h3>Capability building</h3><p>Seventy-five programmes since 2018. It counts only if they can run it without me.</p></div></div>
     </div>
   </section>
 
@@ -295,10 +295,10 @@ html[lang="th"] .hero h1{font-size:clamp(31px,4.2vw,52px);line-height:1.2;text-w
     <div class="wrap section-grid">
       <p class="label">Teaching and speaking</p>
       <div>
-        <p style="max-width:38em;margin-bottom:22px;font-size:17px">Seventy-six programmes since 2018.
+        <p style="max-width:38em;margin-bottom:22px;font-size:17px">Seventy-five programmes since 2018.
         Selected clients include Krungthai Bank, Generali Life Assurance, Srithai Superware, B. Grimm Power, Singha, Government Savings Bank, Thai Chamber of Commerce, PDPC, NDSI, Excise Department, NESDC, Ministry of Culture, Tourism Authority of Thailand, NIA.</p>
         <div class="rows">
-          <div class="row"><div class="t">Apple Distinguished Educator, South East Asia<small>Apple Inc.</small></div><div class="y">Nov 2025</div></div>
+          <div class="row"><div class="t">AI Transformation for Executives<small>Srithai Superware</small></div><div class="y">Aug 2025</div></div>
           <div class="row"><div class="t">Generative AI for Military Work<small>National Defence Studies Institute</small></div><div class="y">Mar 2026</div></div>
           <div class="row"><div class="t">AI and Data Driven Organization for Executives<small>Office of the Personal Data Protection Committee</small></div><div class="y">Jul 2025</div></div>
           <div class="row"><div class="t">Generative AI for Business<small>Krungthai Bank</small></div><div class="y">May 2024</div></div>

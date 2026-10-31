@@ -115,6 +115,18 @@ notes.append(f"{programmes} programmes present")
 
 grant_rows = pages["index.html"].count('class="row"')
 
+# the stat strip is written by hand, the count is not: keep them honest
+stat_numbers = re.findall(r'<div class="stat"><b>([^<]+)</b>', pages["index.html"])
+if str(programmes) not in stat_numbers:
+    fail(f"stat strip {stat_numbers} disagrees with the {programmes} programmes in SPEAKING")
+if str(len(publications)) not in stat_numbers:
+    fail(f"stat strip {stat_numbers} disagrees with the {len(publications)} publications")
+columns = re.search(r"\.stats\{[^}]*repeat\((\d+),1fr\)", pages["index.html"])
+if not columns:
+    fail("the .stats grid no longer declares a fixed column count")
+elif int(columns.group(1)) != len(stat_numbers):
+    fail(f".stats has {columns.group(1)} columns for {len(stat_numbers)} tiles")
+
 # 6. the identity links are actually on the page --------------------------
 for name in HOME:
     html = pages[name]
