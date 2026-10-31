@@ -509,10 +509,9 @@ CSS = """
   --serif:"Iowan Old Style","Palatino Linotype",Palatino,"Book Antiqua",Georgia,serif;
   --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
 }
-@media (prefers-color-scheme:dark){
-  :root{ --paper:#0B0B0C; --ink:#F5F2EA; --muted:#9C978C; --line:rgba(245,242,234,.15);
-         --line-strong:rgba(245,242,234,.32); --tile:#F5F2EA; --tile-ink:#0B0B0C; }
-}
+/* one theme only: paper and ink. A dark variant was tried and dropped — the
+   colour organisation marks need a light plate, and two surfaces doubled the
+   work for no reader benefit. */
 *,*::before,*::after{box-sizing:border-box}
 html{-webkit-text-size-adjust:100%}
 body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);
@@ -644,11 +643,6 @@ footer{padding:56px 0 64px}
 .logos img{width:auto;filter:none;opacity:1}
 .logos img.wordmark{height:32px}
 .logos img.emblem{height:42px}
-@media (prefers-color-scheme:dark){
-  /* colour marks need a light plate on a dark page; recolouring brand logos is
-     worse than giving them the surface they were drawn for */
-  .band .logos{background:#F5F2EA;padding:20px 22px}
-}
 @media (max-width:620px){
   .logos{gap:20px 26px}
   .logos img.wordmark{height:26px}
@@ -714,8 +708,7 @@ def head(title: str, desc: str, path: str, extra: str = "", lang: str = "en",
 <meta name="twitter:title" content="{e(title)}">
 <meta name="twitter:description" content="{e(desc)}">
 <meta name="twitter:image" content="{BASE}/assets/og.png">
-<meta name="theme-color" content="#F5F2EA" media="(prefers-color-scheme:light)">
-<meta name="theme-color" content="#0B0B0C" media="(prefers-color-scheme:dark)">
+<meta name="theme-color" content="#F5F2EA">
 <link rel="icon" href="{prefix}favicon.ico" sizes="32x32">
 <link rel="icon" href="{prefix}assets/icons/favicon-32.png" type="image/png" sizes="32x32">
 <link rel="apple-touch-icon" href="{prefix}assets/icons/apple-touch-icon.png">

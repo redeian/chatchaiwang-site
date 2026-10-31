@@ -42,8 +42,9 @@ shadows PIL and fontTools otherwise.
 ## Design
 
 Paper `#F5F2EA`, ink `#0B0B0C`, muted `#6B675E`, one hairline weight. Serif for
-display, system sans for text. Dark mode follows `prefers-color-scheme` and is
-pure CSS. Nothing moves, nothing animates, nothing loads late.
+display, system sans for text. One theme only — a dark variant was built and
+removed: the colour organisation marks need a light plate, and maintaining two
+surfaces bought the reader nothing.
 
 ## SEO
 
