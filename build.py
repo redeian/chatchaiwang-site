@@ -35,18 +35,15 @@ STATS = [
 FOCUS = [
     (
         "Applied AI",
-        "Language models that hold up outside a demo. Academic assessment, service agents, "
-        "manpower planning, and the evaluation work nobody puts in the press release.",
+        "Language models that hold up outside a demo: assessment, service agents, manpower planning.",
     ),
     (
         "Data governance",
-        "Data protection and privacy programmes that people can actually follow. Master planning "
-        "for the national PDPA regulator, and governance frameworks for trade and mining data.",
+        "Privacy programmes people can follow. Master planning for the national regulator.",
     ),
     (
         "Capability building",
-        "Seventy-six programmes since 2018 for banks, insurers, ministries, and universities. "
-        "The work only counts if the institution can run it without me.",
+        "Seventy-six programmes since 2018. It counts only if they can run it without me.",
     ),
 ]
 
@@ -393,8 +390,7 @@ CLIENTS = (
 LOGO_BANDS = [
     (
         "Research grants and advisory work for the public sector",
-        "Commissioned and funded engagements, 2019 to 2026, each with a contract and a funded "
-        "period. No project listed here was unpaid work.",
+        "Commissioned and funded, 2019 to 2026.",
         [
             ("senate", "Senate of Thailand", 96),
             ("etda", "Electronic Transactions Development Agency", 314),
@@ -405,8 +401,7 @@ LOGO_BANDS = [
     ),
     (
         "AI transformation and applied research for companies",
-        "Consulting and research engagements, 2023 to present, across insurance, energy, "
-        "manufacturing and telecommunications.",
+        "Consulting and research, 2023 to present.",
         [
             ("true", "True Corporation", 233),
             ("srithai", "Srithai Superware", 304),
@@ -416,7 +411,7 @@ LOGO_BANDS = [
     ),
     (
         "Certified by",
-        "Trainer and practitioner certifications held in Thailand, Singapore and the United States.",
+        "Thailand, Singapore, the United States.",
         [
             ("depa", "Digital Economy Promotion Agency", 154),
             ("oceg", "OCEG, Singapore", 252),
@@ -424,8 +419,7 @@ LOGO_BANDS = [
     ),
     (
         "Degrees from the United States and Thailand",
-        "Ph.D. and Master of Interactive Technology in Dallas, Texas. First class honours in "
-        "computer science in Bangkok.",
+        "Ph.D. and Master of Interactive Technology, Dallas. First class honours, Bangkok.",
         [
             ("smu-lockup", "Southern Methodist University, USA", 253),
             ("utcc", "University of the Thai Chamber of Commerce", 215),
@@ -820,14 +814,12 @@ def page_index() -> str:
     <div class="wrap hero-grid">
       <div>
         <p class="eyebrow">Bangkok, Thailand</p>
-        <h1>{NAME}, Ph.D.</h1>
+        <h1>Asst. Prof. {NAME}, Ph.D.</h1>
         <p class="lede">I design and run the systems that let institutions use AI without losing
-        control of their data. Two decades across software engineering, IT leadership and applied
-        research, delivered for a national senate, a data-protection regulator, and universities
-        that cannot afford to guess.</p>
-        <p class="now">Currently Vice President of Information Technology and Assistant Professor at the
-        University of the Thai Chamber of Commerce, and a member of the Business and Service
-        Standards Certification Committee at the Thai Chamber of Commerce.</p>
+        control of their data. Twenty years across software engineering, IT leadership and applied
+        research.</p>
+        <p class="now">Vice President of Information Technology and Assistant Professor at the
+        University of the Thai Chamber of Commerce.</p>
         <div class="actions">
           <a class="btn" href="mailto:{EMAIL}">Start a conversation</a>
           <a class="btn ghost" href="assets/cv.pdf">Download CV</a>
@@ -850,9 +842,8 @@ def page_index() -> str:
   <section style="padding:34px 0 30px">
     <div class="wrap">
       {logo_bands()}
-      <p class="intl">Educated in Texas. Eight years building software in the United States, then
-      teaching and advising across ASEAN and certifying practitioners in Thailand and Singapore.
-      Delivered in Thai and English.</p>
+      <p class="intl">Educated in Texas. Eight years in US software. Teaching across ASEAN,
+      certified in Singapore.</p>
       <p class="note">{e(LOGO_NOTE)}</p>
     </div>
   </section>
@@ -868,10 +859,8 @@ def page_index() -> str:
     <div class="wrap section-grid">
       <p class="label">Research grants</p>
       <div>
-        <p style="max-width:38em;margin-bottom:22px;font-size:17px">Seven funded research grants
-        since 2023, every one paid for by the body named — a national legislature, two ministries, a
-        state agency, a regulator, a listed company and two university grants. Each carries a
-        funded period and a deliverable that had to work.</p>
+        <p style="max-width:38em;margin-bottom:22px;font-size:17px">Seven funded grants since 2023,
+        each paid for by the body named.</p>
         <div class="rows">{projects}</div>
       </div>
     </div>
@@ -961,9 +950,8 @@ def page_publications() -> str:
     <div class="wrap">
       <p class="eyebrow">Publications</p>
       <h1 style="font-size:clamp(32px,4.4vw,52px)">Peer-reviewed work</h1>
-      <p class="lede" style="max-width:36em">Eighteen items from 2015 to 2026, across ubiquitous
-      computing, applied machine learning and AI in education. Grouped by venue type, newest first.
-      DOIs and article links where they exist.</p>
+      <p class="lede" style="max-width:36em">Eighteen items, 2015 to 2026. Grouped by venue type,
+      newest first, with DOIs where they exist.</p>
     </div>
   </div>
 
@@ -1020,8 +1008,8 @@ def page_speaking() -> str:
     <div class="wrap">
       <p class="eyebrow">Teaching and speaking</p>
       <h1 style="font-size:clamp(32px,4.4vw,52px)">{total} programmes, 2018 to 2026</h1>
-      <p class="lede" style="max-width:36em">Executive AI programmes, train-the-trainer work, and
-      keynotes for banks, insurers, ministries and universities. Grouped by year, newest first.</p>
+      <p class="lede" style="max-width:36em">Executive AI programmes and keynotes for banks,
+      insurers, ministries and universities. Newest first.</p>
       <p class="now">Selected clients include {e(CLIENTS)}.</p>
     </div>
   </div>
