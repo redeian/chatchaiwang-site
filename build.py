@@ -1120,11 +1120,7 @@ def page_index() -> str:
         research.</p>
         <p class="now">Vice President of Information Technology and Assistant Professor at the
         University of the Thai Chamber of Commerce, and founder of
-        <a href="{ACADEMY}" rel="me noopener">Mark Digital Academy</a>. In Thailand I am known
-        as <strong lang="th">หมาก ดิจิทัล</strong> (Mark Digital) and my students call me
-        <strong lang="th">อ.หมาก</strong> — the same person as
-        <strong>Chatchai Wangwiwattana</strong>. <strong>redeian</strong> is my handle on GitHub,
-        Kaggle and X.</p>
+        <a href="{ACADEMY}" rel="me noopener">Mark Digital Academy</a>.</p>
         <div class="actions">
           <a class="btn" href="mailto:{EMAIL}">Start a conversation</a>
           <a class="btn ghost" href="assets/cv.pdf">Download CV</a>
@@ -1475,10 +1471,7 @@ def page_index_th() -> str:
         <p class="lede">ผมออกแบบและดูแลระบบที่ทำให้องค์กรใช้ AI ได้โดยไม่เสียการควบคุมข้อมูลของตัวเอง
         สิบแปดปีในงานวิศวกรรมซอฟต์แวร์ การนำด้านไอที และงานวิจัยประยุกต์</p>
         <p class="now">รองอธิการบดีฝ่ายเทคโนโลยีสารสนเทศ และอาจารย์ประจำมหาวิทยาลัยหอการค้าไทย
-        ผู้ก่อตั้ง <a href="{ACADEMY}" rel="me noopener">Mark Digital Academy</a>
-        ในประเทศไทยผมเป็นที่รู้จักในชื่อ <strong>หมาก ดิจิทัล</strong> (Mark Digital) และนักเรียนเรียกผมว่า
-        <strong>อ.หมาก</strong> — เป็นคนเดียวกับ <strong>ชัชชัย หวังวิวัฒนา</strong>
-        และ <strong>redeian</strong> คือชื่อผู้ใช้ของผมบน GitHub, Kaggle และ X</p>
+        ผู้ก่อตั้ง <a href="{ACADEMY}" rel="me noopener">Mark Digital Academy</a></p>
         <div class="actions">
           <a class="btn" href="mailto:{EMAIL}">พูดคุยกัน</a>
           <a class="btn ghost" href="{prefix}assets/cv.pdf">ดาวน์โหลด CV</a>
