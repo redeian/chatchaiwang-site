@@ -27,7 +27,7 @@ NAME_TH = "ชัชชัย หวังวิวัฒนา"
 STATS = [
     ("18", "peer-reviewed publications", "2015 to 2026"),
     ("76", "training and speaking programmes", "since 2018"),
-    ("5", "funded research projects", "2023 to 2026"),
+    ("5", "funded research grants", "2023 to 2026, all funded"),
     ("18", "years in software and IT", "industry and academia"),
 ]
 
@@ -377,23 +377,34 @@ CLIENTS = (
 # without the text that says what the relationship was.
 LOGO_BANDS = [
     (
-        "Work commissioned by",
-        "Research, advisory and consulting engagements, 2019 to 2026.",
+        "Work commissioned and funded by",
+        "Research grants, advisory and consulting engagements, 2019 to 2026. Every project was "
+        "commissioned and paid for by the organisation named.",
         [
             ("senate", "Senate of Thailand", 96),
             ("etda", "Electronic Transactions Development Agency", 268),
             ("pdpc", "Office of the Personal Data Protection Committee", 184),
             ("dpim", "Department of Primary Industries and Mines", 85),
+            ("tcc", "Thai Chamber of Commerce", 410),
             ("true", "True Corporation", 263),
             ("srithai", "Srithai Superware", 367),
         ],
     ),
     (
-        "Studied at",
-        "",
+        "Certified by",
+        "Trainer and practitioner certifications held in Thailand, Singapore and the United States.",
         [
+            ("depa", "Digital Economy Promotion Agency", 162),
+            ("oceg", "OCEG, Singapore", 290),
+        ],
+    ),
+    (
+        "Degrees from the United States and Thailand",
+        "Ph.D. and Master of Interactive Technology in Dallas, Texas. First class honours in "
+        "computer science in Bangkok.",
+        [
+            ("smu", "Southern Methodist University, USA", 327),
             ("utcc", "University of the Thai Chamber of Commerce", 240),
-            ("smu", "Southern Methodist University", 327),
         ],
     ),
 ]
@@ -562,18 +573,23 @@ footer{padding:56px 0 64px}
 .band + .band{border-bottom:0;padding-top:0}
 .band h3{font-size:11.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);
   font-family:var(--sans);margin:0 0 20px}
-.logos{display:flex;flex-wrap:wrap;align-items:center;gap:26px 40px}
-.logos img{width:auto;filter:grayscale(1);opacity:.78}
-.logos img.wordmark{height:30px}
-.logos img.emblem{height:40px}
-.logos img:hover{opacity:1}
-@media (prefers-color-scheme:dark){ .logos img{filter:grayscale(1) invert(1);opacity:.7} }
+.logos{display:flex;flex-wrap:wrap;align-items:center;gap:26px 44px}
+.logos img{width:auto;filter:none;opacity:1}
+.logos img.wordmark{height:32px}
+.logos img.emblem{height:42px}
+@media (prefers-color-scheme:dark){
+  /* colour marks need a light plate on a dark page; recolouring brand logos is
+     worse than giving them the surface they were drawn for */
+  .band .logos{background:#F5F2EA;padding:20px 22px}
+}
 @media (max-width:620px){
   .logos{gap:20px 26px}
   .logos img.wordmark{height:26px}
   .logos img.emblem{height:34px}
+  .band .logos{padding:16px 14px}
 }
 .note{font-size:12.5px;line-height:1.6;color:var(--muted);margin:22px 0 0;max-width:62ch}
+.intl{font-size:15px;line-height:1.65;margin:28px 0 0;max-width:58ch}
 
 /* print */
 @media print{
@@ -801,6 +817,9 @@ def page_index() -> str:
   <section style="padding:34px 0 30px">
     <div class="wrap">
       {logo_bands()}
+      <p class="intl">Educated in Texas. Eight years building software in the United States, then
+      teaching and advising across ASEAN and certifying practitioners in Thailand and Singapore.
+      Delivered in Thai and English.</p>
       <p class="note">{e(LOGO_NOTE)}</p>
     </div>
   </section>
@@ -814,10 +833,12 @@ def page_index() -> str:
 
   <section>
     <div class="wrap section-grid">
-      <p class="label">Research</p>
+      <p class="label">Research grants</p>
       <div>
-        <p style="max-width:38em;margin-bottom:22px;font-size:17px">Five funded projects since 2023,
-        each with a government or corporate partner and a deliverable that had to work.</p>
+        <p style="max-width:38em;margin-bottom:22px;font-size:17px">Five grants and commissioned
+        studies since 2023, every one funded by the organisation named — a national legislature, two
+        ministries, a state agency, a regulator and a listed company. Each carries a contract, a
+        funded period and a deliverable that had to work.</p>
         <div class="rows">{projects}</div>
       </div>
     </div>

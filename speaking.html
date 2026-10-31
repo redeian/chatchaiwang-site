@@ -165,18 +165,23 @@ footer{padding:56px 0 64px}
 .band + .band{border-bottom:0;padding-top:0}
 .band h3{font-size:11.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);
   font-family:var(--sans);margin:0 0 20px}
-.logos{display:flex;flex-wrap:wrap;align-items:center;gap:26px 40px}
-.logos img{width:auto;filter:grayscale(1);opacity:.78}
-.logos img.wordmark{height:30px}
-.logos img.emblem{height:40px}
-.logos img:hover{opacity:1}
-@media (prefers-color-scheme:dark){ .logos img{filter:grayscale(1) invert(1);opacity:.7} }
+.logos{display:flex;flex-wrap:wrap;align-items:center;gap:26px 44px}
+.logos img{width:auto;filter:none;opacity:1}
+.logos img.wordmark{height:32px}
+.logos img.emblem{height:42px}
+@media (prefers-color-scheme:dark){
+  /* colour marks need a light plate on a dark page; recolouring brand logos is
+     worse than giving them the surface they were drawn for */
+  .band .logos{background:#F5F2EA;padding:20px 22px}
+}
 @media (max-width:620px){
   .logos{gap:20px 26px}
   .logos img.wordmark{height:26px}
   .logos img.emblem{height:34px}
+  .band .logos{padding:16px 14px}
 }
 .note{font-size:12.5px;line-height:1.6;color:var(--muted);margin:22px 0 0;max-width:62ch}
+.intl{font-size:15px;line-height:1.65;margin:28px 0 0;max-width:58ch}
 
 /* print */
 @media print{

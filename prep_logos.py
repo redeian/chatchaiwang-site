@@ -20,7 +20,8 @@ CHROME = "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"
 HEIGHT = 96          # 2x a 48 px band height
 PAPER = (245, 242, 234, 255)
 
-WANT = ["senate", "etda", "pdpc", "dpim", "true", "srithai", "utcc", "smu"]
+WANT = ["senate", "etda", "pdpc", "dpim", "true", "srithai", "tcc",
+        "depa", "stanford", "oceg", "utcc", "smu"]
 
 
 def trim(im: Image.Image) -> Image.Image:

@@ -166,18 +166,23 @@ footer{padding:56px 0 64px}
 .band + .band{border-bottom:0;padding-top:0}
 .band h3{font-size:11.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);
   font-family:var(--sans);margin:0 0 20px}
-.logos{display:flex;flex-wrap:wrap;align-items:center;gap:26px 40px}
-.logos img{width:auto;filter:grayscale(1);opacity:.78}
-.logos img.wordmark{height:30px}
-.logos img.emblem{height:40px}
-.logos img:hover{opacity:1}
-@media (prefers-color-scheme:dark){ .logos img{filter:grayscale(1) invert(1);opacity:.7} }
+.logos{display:flex;flex-wrap:wrap;align-items:center;gap:26px 44px}
+.logos img{width:auto;filter:none;opacity:1}
+.logos img.wordmark{height:32px}
+.logos img.emblem{height:42px}
+@media (prefers-color-scheme:dark){
+  /* colour marks need a light plate on a dark page; recolouring brand logos is
+     worse than giving them the surface they were drawn for */
+  .band .logos{background:#F5F2EA;padding:20px 22px}
+}
 @media (max-width:620px){
   .logos{gap:20px 26px}
   .logos img.wordmark{height:26px}
   .logos img.emblem{height:34px}
+  .band .logos{padding:16px 14px}
 }
 .note{font-size:12.5px;line-height:1.6;color:var(--muted);margin:22px 0 0;max-width:62ch}
+.intl{font-size:15px;line-height:1.65;margin:28px 0 0;max-width:58ch}
 
 /* print */
 @media print{
@@ -228,11 +233,14 @@ footer{padding:56px 0 64px}
     </div>
   </div>
 
-  <div class="wrap"><div class="stats"><div class="stat"><b>18</b><span>peer-reviewed publications</span><i>2015 to 2026</i></div><div class="stat"><b>76</b><span>training and speaking programmes</span><i>since 2018</i></div><div class="stat"><b>5</b><span>funded research projects</span><i>2023 to 2026</i></div><div class="stat"><b>18</b><span>years in software and IT</span><i>industry and academia</i></div></div></div>
+  <div class="wrap"><div class="stats"><div class="stat"><b>18</b><span>peer-reviewed publications</span><i>2015 to 2026</i></div><div class="stat"><b>76</b><span>training and speaking programmes</span><i>since 2018</i></div><div class="stat"><b>5</b><span>funded research grants</span><i>2023 to 2026, all funded</i></div><div class="stat"><b>18</b><span>years in software and IT</span><i>industry and academia</i></div></div></div>
 
   <section style="padding:34px 0 30px">
     <div class="wrap">
-      <div class="band"><h3>Work commissioned by</h3><p style="margin:-10px 0 20px;font-size:14px;color:var(--muted)">Research, advisory and consulting engagements, 2019 to 2026.</p><div class="logos"><img src="assets/logos/senate.png" alt="Senate of Thailand" width="96" height="96" class="emblem" loading="lazy" decoding="async"><img src="assets/logos/etda.png" alt="Electronic Transactions Development Agency" width="268" height="96" class="wordmark" loading="lazy" decoding="async"><img src="assets/logos/pdpc.png" alt="Office of the Personal Data Protection Committee" width="184" height="96" class="wordmark" loading="lazy" decoding="async"><img src="assets/logos/dpim.png" alt="Department of Primary Industries and Mines" width="85" height="96" class="emblem" loading="lazy" decoding="async"><img src="assets/logos/true.png" alt="True Corporation" width="263" height="96" class="wordmark" loading="lazy" decoding="async"><img src="assets/logos/srithai.png" alt="Srithai Superware" width="367" height="96" class="wordmark" loading="lazy" decoding="async"></div></div><div class="band"><h3>Studied at</h3><div class="logos"><img src="assets/logos/utcc.png" alt="University of the Thai Chamber of Commerce" width="240" height="96" class="wordmark" loading="lazy" decoding="async"><img src="assets/logos/smu.png" alt="Southern Methodist University" width="327" height="96" class="wordmark" loading="lazy" decoding="async"></div></div>
+      <div class="band"><h3>Work commissioned and funded by</h3><p style="margin:-10px 0 20px;font-size:14px;color:var(--muted)">Research grants, advisory and consulting engagements, 2019 to 2026. Every project was commissioned and paid for by the organisation named.</p><div class="logos"><img src="assets/logos/senate.png" alt="Senate of Thailand" width="96" height="96" class="emblem" loading="lazy" decoding="async"><img src="assets/logos/etda.png" alt="Electronic Transactions Development Agency" width="268" height="96" class="wordmark" loading="lazy" decoding="async"><img src="assets/logos/pdpc.png" alt="Office of the Personal Data Protection Committee" width="184" height="96" class="wordmark" loading="lazy" decoding="async"><img src="assets/logos/dpim.png" alt="Department of Primary Industries and Mines" width="85" height="96" class="emblem" loading="lazy" decoding="async"><img src="assets/logos/tcc.png" alt="Thai Chamber of Commerce" width="410" height="96" class="wordmark" loading="lazy" decoding="async"><img src="assets/logos/true.png" alt="True Corporation" width="263" height="96" class="wordmark" loading="lazy" decoding="async"><img src="assets/logos/srithai.png" alt="Srithai Superware" width="367" height="96" class="wordmark" loading="lazy" decoding="async"></div></div><div class="band"><h3>Certified by</h3><p style="margin:-10px 0 20px;font-size:14px;color:var(--muted)">Trainer and practitioner certifications held in Thailand, Singapore and the United States.</p><div class="logos"><img src="assets/logos/depa.png" alt="Digital Economy Promotion Agency" width="162" height="96" class="wordmark" loading="lazy" decoding="async"><img src="assets/logos/oceg.png" alt="OCEG, Singapore" width="290" height="96" class="wordmark" loading="lazy" decoding="async"></div></div><div class="band"><h3>Degrees from the United States and Thailand</h3><p style="margin:-10px 0 20px;font-size:14px;color:var(--muted)">Ph.D. and Master of Interactive Technology in Dallas, Texas. First class honours in computer science in Bangkok.</p><div class="logos"><img src="assets/logos/smu.png" alt="Southern Methodist University, USA" width="327" height="96" class="wordmark" loading="lazy" decoding="async"><img src="assets/logos/utcc.png" alt="University of the Thai Chamber of Commerce" width="240" height="96" class="wordmark" loading="lazy" decoding="async"></div></div>
+      <p class="intl">Educated in Texas. Eight years building software in the United States, then
+      teaching and advising across ASEAN and certifying practitioners in Thailand and Singapore.
+      Delivered in Thai and English.</p>
       <p class="note">Organisation marks identify the institutions and companies I have worked for or studied at. All marks remain the property of their owners. Their appearance here does not imply endorsement, partnership or certification.</p>
     </div>
   </section>
@@ -246,10 +254,12 @@ footer{padding:56px 0 64px}
 
   <section>
     <div class="wrap section-grid">
-      <p class="label">Research</p>
+      <p class="label">Research grants</p>
       <div>
-        <p style="max-width:38em;margin-bottom:22px;font-size:17px">Five funded projects since 2023,
-        each with a government or corporate partner and a deliverable that had to work.</p>
+        <p style="max-width:38em;margin-bottom:22px;font-size:17px">Five grants and commissioned
+        studies since 2023, every one funded by the organisation named — a national legislature, two
+        ministries, a state agency, a regulator and a listed company. Each carries a contract, a
+        funded period and a deliverable that had to work.</p>
         <div class="rows"><div class="row"><div class="t">Applying Digital and AI Technology to the Operational Efficiency of the Senate<small>Principal Investigator &middot; Senate of Thailand</small></div><div class="y">2025 to 2026</div></div><div class="row"><div class="t">Digital Trade Ecosystem to Support Sustainable Trade Transactions<small>Co-Investigator &middot; ETDA under the CPTA programme</small></div><div class="y">2025 to 2026</div></div><div class="row"><div class="t">Data Governance Framework for Mineral and Mining Data<small>Co-Investigator &middot; Department of Primary Industries and Mines</small></div><div class="y">2025 to 2026</div></div><div class="row"><div class="t">Marketing Strategies and Game Consumption across the Game Life Cycle<small>Principal Investigator &middot; True Corporation</small></div><div class="y">2023</div></div><div class="row"><div class="t">Procedural Map Generation for Game Development<small>Principal Investigator &middot; True Corporation</small></div><div class="y">2023</div></div></div>
       </div>
     </div>
