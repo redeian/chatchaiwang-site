@@ -109,6 +109,7 @@ EXPERIENCE = [
     (
         "Industry and advisory",
         [
+            ("Founder and Executive", "Mark Digital Academy", "2023 to present"),
             ("AI Transformation Consultant, cross-functional initiative", "Generali Life Assurance (Thailand)", "2026"),
             ("AI Transformation Consultant, AI champion projects, training and design thinking", "B.Grimm Power", "2024 to 2026"),
             ("AI Transformation Consultant", "Srithai Superware", "2025 to present"),
@@ -482,12 +483,12 @@ LOGO_NOTE = (
 )
 
 
-def logo_bands() -> str:
+def logo_bands(bands=None) -> str:
     # Emblems read smaller than wordmarks at the same cap height, so the two
     # seal-shaped marks get a few extra pixels to hold their optical weight.
     emblems = {"senate", "dpim", "smu-seal"}
     out = []
-    for heading, sub, items in LOGO_BANDS:
+    for heading, sub, items in (bands or LOGO_BANDS):
         imgs = "".join(
             f'<img src="assets/logos/{key}.png" alt="{e(name)}" width="{w}" height="96" '
             f'class="{"emblem" if key in emblems else "wordmark"}" '
@@ -678,22 +679,27 @@ def e(text: str) -> str:
     return html.escape(text, quote=True)
 
 
-def head(title: str, desc: str, path: str, extra: str = "") -> str:
+def head(title: str, desc: str, path: str, extra: str = "", lang: str = "en",
+         prefix: str = "", alternates: str = "") -> str:
     url = BASE + path
     preload = ""
-    if path == "/":
+    if path in ("/", "/th/"):
         preload = ('<link rel="preload" as="image" type="image/webp" '
-                   'imagesrcset="assets/img/portrait-480.webp 480w, assets/img/portrait-960.webp 960w" '
+                   f'imagesrcset="{prefix}assets/img/portrait-480.webp 480w, '
+                   f'{prefix}assets/img/portrait-960.webp 960w" '
                    'imagesizes="(max-width:860px) 320px, 360px" fetchpriority="high">\n')
+    skip = "ข้ามไปที่เนื้อหา" if lang == "th" else "Skip to content"
+    home = "หน้าแรก" if lang == "th" else "home"
+    home_href = "index.html" if lang == "th" else f"{prefix}index.html"
     return f"""<!doctype html>
-<html lang="en">
+<html lang="{lang}">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>{e(title)}</title>
 <meta name="description" content="{e(desc)}">
 <link rel="canonical" href="{url}">
-<meta name="author" content="{NAME}">
+{alternates}<meta name="author" content="{NAME}">
 <meta name="robots" content="index,follow,max-image-preview:large">
 <meta property="og:type" content="profile">
 <meta property="og:site_name" content="{NAME}">
@@ -703,61 +709,80 @@ def head(title: str, desc: str, path: str, extra: str = "") -> str:
 <meta property="og:image" content="{BASE}/assets/og.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:locale" content="en_US">
+<meta property="og:locale" content="{'th_TH' if lang == 'th' else 'en_US'}">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="{e(title)}">
 <meta name="twitter:description" content="{e(desc)}">
 <meta name="twitter:image" content="{BASE}/assets/og.png">
 <meta name="theme-color" content="#F5F2EA" media="(prefers-color-scheme:light)">
 <meta name="theme-color" content="#0B0B0C" media="(prefers-color-scheme:dark)">
-<link rel="icon" href="favicon.ico" sizes="32x32">
-<link rel="icon" href="assets/icons/favicon-32.png" type="image/png" sizes="32x32">
-<link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png">
-<link rel="manifest" href="site.webmanifest">
+<link rel="icon" href="{prefix}favicon.ico" sizes="32x32">
+<link rel="icon" href="{prefix}assets/icons/favicon-32.png" type="image/png" sizes="32x32">
+<link rel="apple-touch-icon" href="{prefix}assets/icons/apple-touch-icon.png">
+<link rel="manifest" href="{prefix}site.webmanifest">
 {preload}<style>{CSS}</style>
 {extra}
 </head>
 <body>
-<a class="skip" href="#main">Skip to content</a>
+<a class="skip" href="#main">{skip}</a>
 <header class="masthead">
   <div class="wrap">
-    <a class="brand" href="index.html" aria-label="{NAME}, home">{MARK_INLINE}<span>{NAME}</span></a>
-    <nav class="nav" aria-label="Primary">{"".join(nav_items(path))}</nav>
+    <a class="brand" href="{home_href}" aria-label="{NAME}, {home}">{MARK_INLINE}<span>{NAME}</span></a>
+    <nav class="nav" aria-label="Primary">{"".join(nav_items(path, lang, prefix))}</nav>
   </div>
 </header>
 """
 
 
-def nav_items(current: str) -> list[str]:
-    items = [("index.html", "Profile"), ("publications.html", "Publications"), ("speaking.html", "Speaking")]
+def nav_items(current: str, lang: str = "en", prefix: str = "") -> list[str]:
+    if lang == "th":
+        items = [("index.html", "โปรไฟล์"), (prefix + "publications.html", "ผลงานตีพิมพ์"),
+                 (prefix + "speaking.html", "การบรรยาย")]
+    else:
+        items = [(prefix + "index.html", "Profile"), (prefix + "publications.html", "Publications"),
+                 (prefix + "speaking.html", "Speaking")]
     out = []
     for href, label in items:
-        cur = ' aria-current="page"' if href == current else ""
+        cur = ' aria-current="page"' if href.endswith(current) and current not in ("index.html",) else ""
         out.append(f'<a href="{href}"{cur}>{label}</a>')
+    if lang == "th":
+        out.append(f'<a href="{prefix}index.html" hreflang="en" lang="en">EN</a>')
+    else:
+        out.append('<a href="th/" hreflang="th" lang="th">ไทย</a>')
     return out
 
 
-def foot_block() -> str:
+def foot_block(lang: str = "en", prefix: str = "") -> str:
+    if lang == "th":
+        heading, blurb = "ร่วมงานกัน", (
+            "สามทางที่เริ่มได้ ทบทวนธรรมาภิบาล AI ให้องค์กรของคุณ หลักสูตรผู้บริหารสำหรับทีมผู้นำ "
+            "และโครงการ AI Champions 90 วันที่ทำให้คนของคุณเดินระบบเองได้")
+        links = [(f"mailto:{EMAIL}", EMAIL), (LINKEDIN, "LinkedIn"),
+                 (YOUTUBE, "Mark Digital Academy"), (f"{prefix}assets/cv.pdf", "CV, PDF")]
+        fine_left, fine_right = f"&copy; 2026 {NAME} กรุงเทพฯ ประเทศไทย", "หน้าเว็บ static ไม่มีตัวติดตาม ไม่มีคุกกี้"
+    else:
+        heading, blurb = "Work with me", (
+            "Three ways in. An AI governance baseline for your institution. An executive programme "
+            "for the leadership team. A ninety-day AI champion programme that leaves your own people "
+            "able to run it.")
+        links = [(f"mailto:{EMAIL}", EMAIL), (LINKEDIN, "LinkedIn"),
+                 (YOUTUBE, "Mark Digital Academy"), (f"{prefix}assets/cv.pdf", "CV, PDF")]
+        fine_left, fine_right = f"&copy; 2026 {NAME}. Bangkok, Thailand.", "Static page. No trackers, no cookies."
+    rendered = "".join(f'<a href="{h}"{" rel=\"me noopener\"" if h.startswith("http") else ""}>{label}</a>'
+                       for h, label in links)
     return f"""
 <footer>
   <div class="wrap">
     <div class="foot">
       <div>
-        <h2>Work with me</h2>
-        <p>Three ways in. An AI governance baseline for your institution. An executive programme
-        for the leadership team. A ninety-day AI champion programme that leaves your own people
-        able to run it.</p>
+        <h2>{heading}</h2>
+        <p>{blurb}</p>
       </div>
-      <div class="links">
-        <a href="mailto:{EMAIL}">{EMAIL}</a>
-        <a href="{LINKEDIN}" rel="me noopener">LinkedIn</a>
-        <a href="{YOUTUBE}" rel="me noopener">Mark Digital Academy</a>
-        <a href="assets/cv.pdf">CV, PDF</a>
-      </div>
+      <div class="links">{rendered}</div>
     </div>
     <div class="fine">
-      <span>&copy; 2026 {NAME}. Bangkok, Thailand.</span>
-      <span>Static page. No trackers, no cookies.</span>
+      <span>{fine_left}</span>
+      <span>{fine_right}</span>
     </div>
   </div>
 </footer>
@@ -1003,7 +1028,10 @@ def page_index() -> str:
     desc = ("Chatchai Wangwiwattana, Ph.D. Applied AI, data governance and digital transformation. "
             "Vice President of Information Technology at UTCC, Bangkok. 18 peer-reviewed publications.")
     ld = f'<script type="application/ld+json">{person_jsonld()}</script>'
-    return head(f"{NAME_FULL} — Applied AI and Data Governance", desc, "/", ld) + body + foot_block()
+    alt = ('<link rel="alternate" hreflang="en" href="' + BASE + '/">\n'
+           '<link rel="alternate" hreflang="th" href="' + BASE + '/th/">\n'
+           '<link rel="alternate" hreflang="x-default" href="' + BASE + '/">\n')
+    return head(f"{NAME_FULL} — Applied AI and Data Governance", desc, "/", ld, alternates=alt) + body + foot_block()
 
 
 def page_publications() -> str:
@@ -1102,6 +1130,248 @@ def page_speaking() -> str:
     return head("Speaking — " + NAME_FULL, desc, "/speaking.html") + body + foot_block()
 
 
+# --------------------------------------------------------------- Thai profile
+TH_STATS = [
+    ("18", "ผลงานตีพิมพ์ระดับนานาชาติ", "2015 ถึง 2026"),
+    ("76", "หลักสูตรอบรมและการบรรยาย", "ตั้งแต่ 2018"),
+    ("20+", "ระบบซอฟต์แวร์ที่สร้างเอง", "ใช้งานจริงในมหาวิทยาลัย"),
+    ("80%", "ต่ำกว่าราคาที่ผู้ขายเสนอ", "งานที่สร้างเองในมหาวิทยาลัย"),
+]
+
+TH_FOCUS = [
+    ("AI ที่ใช้งานได้จริง",
+     "โมเดลภาษาที่ผ่านการใช้งานจริง ไม่ใช่แค่เดโม งานประเมินผล ระบบผู้ช่วยบริการ และการวางแผนกำลังคน"),
+    ("ธรรมาภิบาลข้อมูล",
+     "โครงการคุ้มครองข้อมูลที่คนในองค์กรทำตามได้จริง และแผนแม่บทให้หน่วยกำกับดูแลระดับประเทศ"),
+    ("สร้างขีดความสามารถ",
+     "76 หลักสูตรตั้งแต่ 2018 นับว่าสำเร็จก็ต่อเมื่อคนของเขาทำเองได้โดยไม่ต้องมีผม"),
+]
+
+TH_BANDS = [
+    ("งานวิจัยและงานที่ปรึกษาภาครัฐ", "ได้รับทุนและถูกว่าจ้าง 2019 ถึง 2026", LOGO_BANDS[0][2]),
+    ("AI transformation และงานวิจัยประยุกต์ให้ภาคเอกชน", "ที่ปรึกษาและงานวิจัย 2023 ถึงปัจจุบัน", LOGO_BANDS[1][2]),
+    ("ได้รับการรับรองจาก", "ไทย สิงคโปร์ สหรัฐอเมริกา", LOGO_BANDS[2][2]),
+    ("ปริญญาจากสหรัฐอเมริกาและไทย",
+     "ปริญญาเอกและปริญญาโทที่ Dallas ปริญญาตรีเกียรตินิยมอันดับหนึ่งที่กรุงเทพฯ", LOGO_BANDS[3][2]),
+]
+
+TH_ENGAGEMENTS = [
+    dict(
+        org="มหาวิทยาลัยหอการค้าไทย",
+        meta="รองอธิการบดีฝ่ายเทคโนโลยีสารสนเทศ &middot; 2025 ถึงปัจจุบัน",
+        body=[
+            "ริเริ่มโครงการ AI UTCC ที่พลิกมหาวิทยาลัยให้เป็น AI-first ทั้งองค์กร ดูแลทีมไอที 50 คน "
+            "คอมพิวเตอร์ 2,000 เครื่อง และ iPad 20,000 เครื่อง พร้อมสร้างฐานรากดิจิทัลใหม่ทั้ง "
+            "data warehouse ความปลอดภัยไซเบอร์ ระบบไร้กระดาษ นโยบาย API-first ธรรมาภิบาลข้อมูล และ martech",
+            "เป็นเจ้าหน้าที่คุ้มครองข้อมูลส่วนบุคคลตาม PDPA พัฒนาระบบขึ้นเองมากกว่ายี่สิบระบบ "
+            "โดยแปดระบบด้าน AI มีต้นทุนราวหนึ่งในห้าของที่ผู้ขายภายนอกเสนอ ไม่ได้ซื้อเซิร์ฟเวอร์ AI เอง "
+            "จ่ายตามโทเคนที่ใช้จริง",
+            "สถาบันการศึกษาแห่งแรกในเอเชียแปซิฟิกที่ติดตั้ง Wi-Fi 7 และงานชุดนี้ทำให้มหาวิทยาลัยได้ "
+            "สองรางวัลจาก ACES Awards 2026 รวมถึง Premier Educational Institutions in Asia",
+        ],
+    ),
+    dict(
+        org="ศรีไทยซุปเปอร์แวร์",
+        meta="ที่ปรึกษา AI transformation &middot; 2025 ถึงปัจจุบัน",
+        body=[
+            "ตั้งโครงการ AI Champions ขึ้นมาและขับเคลื่อน transformation ที่ตามมา",
+            "เริ่มจากอบรมผู้บริหาร แล้วให้กลุ่ม champions ไปอบรมต่อทั้งโรงงานด้วยตัวเอง",
+            "ปัจจุบันมีโครงการเดินอยู่จริงทั้งงานดิจิทัล ข้อมูล และ AI รวมถึงงาน digital twin "
+            "หลังผ่าน hackathon และรอบ pitching และอัพสกิลโปรแกรมเมอร์ของบริษัทให้ใช้ AI "
+            "อย่างปลอดภัยภายใต้การกำกับดูแล",
+        ],
+    ),
+    dict(
+        org="เจนเนอราลี่ ประกันชีวิต (ไทย)",
+        meta="ที่ปรึกษา AI transformation โครงการข้ามสายงาน &middot; 2026 เสร็จสิ้น",
+        body=[
+            "ทำ design thinking กับทีมผู้บริหาร จากนั้นสี่รอบกับ AI champions ตั้งแต่คิดไอเดียจนเป็น "
+            "ผลิตภัณฑ์ที่ใช้ได้จริง ปิดท้ายด้วยการ pitching ต่อสปอนเซอร์",
+            "โครงการที่ได้ทุนอนุมัติใช้งานจริงแล้วทั้งฝ่ายขาย บริการลูกค้า digital marketing และข้อมูล",
+        ],
+    ),
+    dict(
+        org="บี.กริม เพาเวอร์",
+        meta="โครงการ AI Champions &middot; 2024 ถึง 2026",
+        body=("อบรม สร้างขีดความสามารถ และ pitching ให้ AI champions ของบริษัท "
+              "โดยมีโครงการที่ขึ้นสู่การใช้งานจริงทุกปี"),
+    ),
+]
+
+TH_ROLE = {
+    "Principal Investigator": "หัวหน้าโครงการ",
+    "Co-Investigator": "ผู้ร่วมวิจัย",
+    "University research grant, University of the Thai Chamber of Commerce": "ทุนวิจัยมหาวิทยาลัยหอการค้าไทย",
+}
+TH_FUNDER = {
+    "Senate of Thailand": "วุฒิสภา",
+    "ETDA under the CPTA programme": "ETDA ภายใต้โครงการ CPTA",
+    "Department of Primary Industries and Mines": "กรมอุตสาหกรรมพื้นฐานและการเหมืองแร่",
+}
+TH_GROUP = {
+    "Leadership and academic appointments": "การนำและตำแหน่งทางวิชาการ",
+    "Industry and advisory": "อุตสาหกรรมและงานที่ปรึกษา",
+}
+
+
+def page_index_th() -> str:
+    prefix = "../"
+    stats = "".join(
+        f'<div class="stat"><b>{n}</b><span>{label}</span><i>{note}</i></div>'
+        for n, label, note in TH_STATS
+    )
+    cards = "".join(f'<div class="card"><h3>{t}</h3><p>{body}</p></div>' for t, body in TH_FOCUS)
+
+    projects = "".join(
+        f'<div class="row"><div class="t">{e(title)}<small>'
+        f'{e(TH_ROLE.get(role, role))} &middot; {e(TH_FUNDER.get(funder, funder))}</small></div>'
+        f'<div class="y">{e(years.replace(" to ", " ถึง "))}</div></div>'
+        for title, role, funder, years in sorted(PROJECTS, key=lambda p: project_span(p[3]), reverse=True)
+    )
+    eng = "".join(
+        f'<article class="pub"><p class="meta">{x["meta"]}</p>'
+        f'<h3>{e(x["org"])}</h3>{engagement_body(x)}</article>'
+        for x in TH_ENGAGEMENTS
+    )
+    exp = ""
+    for group, rows in EXPERIENCE:
+        items = "".join(
+            f'<div class="row"><div class="t">{e(role)}<small>{e(org)}</small></div>'
+            f'<div class="y">{e(years)}</div></div>'
+            for role, org, years in rows
+        )
+        exp += (f'<h3 class="sub" style="margin-top:28px">{e(TH_GROUP.get(group, group))}</h3>'
+                f'<div class="rows">{items}</div>')
+
+    selected = "".join(
+        f'<article class="pub"><p class="meta">{e(p["authors"])} ({p["year"]})</p>'
+        f'<h3>{e(p["title"])}</h3><p class="venue">{e(p["venue"])}'
+        + (f' <a class="doi" href="{p["url"]}" rel="noopener">DOI</a>' if p["url"] else "")
+        + "</p></article>"
+        for p in [JOURNALS[2], CONFERENCES[0], CONFERENCES[1], CONFERENCES[3], JOURNALS[0]]
+    )
+
+    body = f"""
+<main id="main">
+  <div class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <p class="eyebrow">กรุงเทพฯ ประเทศไทย</p>
+        <h1>ผศ. ดร.ชัชชัย หวังวิวัฒนา</h1>
+        <p class="lede">ผมออกแบบและดูแลระบบที่ทำให้องค์กรใช้ AI ได้โดยไม่เสียการควบคุมข้อมูลของตัวเอง
+        สิบแปดปีในงานวิศวกรรมซอฟต์แวร์ การนำด้านไอที และงานวิจัยประยุกต์</p>
+        <p class="now">รองอธิการบดีฝ่ายเทคโนโลยีสารสนเทศ และอาจารย์ประจำมหาวิทยาลัยหอการค้าไทย
+        ผู้ก่อตั้ง <a href="https://www.youtube.com/@markdigitalacademy" rel="me noopener">Mark Digital Academy</a></p>
+        <div class="actions">
+          <a class="btn" href="mailto:{EMAIL}">พูดคุยกัน</a>
+          <a class="btn ghost" href="{prefix}assets/cv.pdf">ดาวน์โหลด CV</a>
+        </div>
+      </div>
+      <figure class="portrait">
+        <picture>
+          <source srcset="{prefix}assets/img/portrait-480.webp 480w, {prefix}assets/img/portrait-960.webp 960w"
+                  sizes="(max-width:860px) 320px, 360px" type="image/webp">
+          <img src="{prefix}assets/img/portrait-960.jpg" width="960" height="1200"
+               alt="ภาพถ่าย ชัชชัย หวังวิวัฒนา" fetchpriority="high" decoding="async">
+        </picture>
+      </figure>
+    </div>
+  </div>
+
+  <div class="wrap"><div class="stats">{stats}</div></div>
+
+  <section style="padding:34px 0 30px">
+    <div class="wrap">
+      {logo_bands(TH_BANDS).replace('src="assets/', f'src="{prefix}assets/')}
+      <p class="intl">จบการศึกษาที่เท็กซัส แปดปีในซอฟต์แวร์ที่สหรัฐอเมริกา สอนทั่วอาเซียน
+      และได้รับการรับรองที่สิงคโปร์</p>
+      <p class="note">เครื่องหมายขององค์กรใช้เพื่อระบุสถาบันและบริษัทที่ผมทำงานด้วยหรือศึกษาที่เท่านั้น
+      เครื่องหมายทั้งหมดเป็นทรัพย์สินของเจ้าของ การปรากฏบนหน้านี้ไม่ได้หมายความว่าองค์กรเหล่านั้น
+      รับรอง เป็นพันธมิตร หรือให้การรับรองใด ๆ</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <p class="label" style="margin-bottom:22px">จุดเน้น</p>
+      <div class="cards">{cards}</div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap section-grid">
+      <p class="label">ผลงานที่เลือกมา</p>
+      <div>{eng}</div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap section-grid">
+      <p class="label">ทุนวิจัย</p>
+      <div>
+        <p style="max-width:38em;margin-bottom:22px;font-size:17px">เจ็ดทุนตั้งแต่ 2023
+        ทุกทุนมีหน่วยงานที่ออกทุนระบุชื่อชัดเจน</p>
+        <div class="rows">{projects}</div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap section-grid">
+      <p class="label">ประสบการณ์</p>
+      <div>{exp}</div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap section-grid">
+      <p class="label">ผลงานตีพิมพ์ที่เลือก</p>
+      <div>
+        {selected}
+        <p style="margin-top:22px"><a href="{prefix}publications.html">ผลงานตีพิมพ์ทั้ง 18 ชิ้น 2015 ถึง 2026</a></p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap section-grid">
+      <p class="label">การศึกษาและใบรับรอง</p>
+      <div class="two">
+        <div>
+          <h3 class="sub">ปริญญา</h3>
+          <ul class="plain">
+            <li>Ph.D. in Computer Science (Ubiquitous Computing)<small>Southern Methodist University, USA</small></li>
+            <li>Master of Interactive Technology<small>Southern Methodist University, USA</small></li>
+            <li>Master of Business Administration (Marketing)<small>มหาวิทยาลัยหอการค้าไทย</small></li>
+            <li>Bachelor of Science in Computer Science, First Class Honours<small>มหาวิทยาลัยหอการค้าไทย</small></li>
+          </ul>
+        </div>
+        <div>
+          <h3 class="sub">ใบรับรอง</h3>
+          <ul class="plain">
+            <li>Certified Digital Transformation Trainer<small>DEPA ประเทศไทย</small></li>
+            <li>Certified Proficiency in Data Protection and GRC<small>OCEG สิงคโปร์</small></li>
+            <li>Certified Video Game Developer<small>The Guildhall at SMU, USA</small></li>
+            <li>Certified Design Your Life Trainer<small>Stanford University</small></li>
+            <li>Certified IoT with NetPie Trainer<small>NECTEC ประเทศไทย</small></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+"""
+    desc = ("ผศ. ดร.ชัชชัย หวังวิวัฒนา ผู้เชี่ยวชาญด้าน AI และธรรมาภิบาลข้อมูล รองอธิการบดีฝ่ายเทคโนโลยี"
+            "สารสนเทศ มหาวิทยาลัยหอการค้าไทย ผลงานตีพิมพ์ 18 ชิ้น และหลักสูตรอบรม 76 หลักสูตร")
+    alt = ('<link rel="alternate" hreflang="en" href="' + BASE + '/">\n'
+           '<link rel="alternate" hreflang="th" href="' + BASE + '/th/">\n'
+           '<link rel="alternate" hreflang="x-default" href="' + BASE + '/">\n')
+    return (head(f"ผศ. ดร.ชัชชัย หวังวิวัฒนา — AI และธรรมาภิบาลข้อมูล", desc, "/th/",
+                 f'<script type="application/ld+json">{person_jsonld()}</script>',
+                 lang="th", prefix=prefix, alternates=alt)
+            + body + foot_block("th", prefix))
+
+
 def page_404() -> str:
     body = """
 <main id="main">
@@ -1151,8 +1421,10 @@ p{{font-family:-apple-system,"Helvetica Neue",Arial,sans-serif;font-size:24px;
 
 
 def main() -> None:
+    (SITE / "th").mkdir(exist_ok=True)
     files = {
         "index.html": page_index(),
+        "th/index.html": page_index_th(),
         "publications.html": page_publications(),
         "speaking.html": page_speaking(),
         "404.html": page_404(),
@@ -1161,7 +1433,7 @@ def main() -> None:
         (SITE / name).write_text(content, encoding="utf-8")
         print("wrote", name, len(content.encode()), "bytes")
 
-    urls = ["/", "/publications.html", "/speaking.html"]
+    urls = ["/", "/th/", "/publications.html", "/speaking.html"]
     sitemap = ['<?xml version="1.0" encoding="UTF-8"?>',
                '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">']
     for u in urls:
