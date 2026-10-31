@@ -20,7 +20,7 @@ CHROME = "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"
 HEIGHT = 96          # 2x a 48 px band height
 PAPER = (245, 242, 234, 255)
 
-WANT = ["senate", "etda", "pdpc", "dpim", "true", "srithai", "tcc",
+WANT = ["senate", "etda", "pdpc", "dpim", "true", "srithai", "tcc", "generali",
         "depa", "stanford", "oceg", "utcc", "smu", "smu-seal"]
 
 # Some sources ship a monochrome seal. Tint it to the organisation's own site

@@ -98,6 +98,8 @@ EXPERIENCE = [
     (
         "Industry and advisory",
         [
+            ("AI Transformation Consultant, cross-functional initiative", "Generali Life Assurance (Thailand)", "2026 to present"),
+            ("AI Transformation Consultant, AI champion projects, training and design thinking", "B.Grimm Power", "2024 to present"),
             ("AI Transformation Consultant", "Srithai Superware", "2025 to present"),
             ("Founder", "Demon Wagon Game Studio, USA", "2010 to 2018"),
             ("Chief Information Officer", "Profitarrowmarketing, LLC, USA", "2016 to 2017"),
@@ -377,17 +379,25 @@ CLIENTS = (
 # without the text that says what the relationship was.
 LOGO_BANDS = [
     (
-        "Work commissioned and funded by",
-        "Research grants, advisory and consulting engagements, 2019 to 2026. Every project was "
-        "commissioned and paid for by the organisation named.",
+        "Research grants and advisory work for the public sector",
+        "Commissioned and funded engagements, 2019 to 2026, each with a contract and a funded "
+        "period. No project listed here was unpaid work.",
         [
             ("senate", "Senate of Thailand", 96),
             ("etda", "Electronic Transactions Development Agency", 314),
             ("pdpc", "Office of the Personal Data Protection Committee", 172),
             ("dpim", "Department of Primary Industries and Mines", 86),
             ("tcc", "Thai Chamber of Commerce", 331),
+        ],
+    ),
+    (
+        "AI transformation and applied research for companies",
+        "Consulting and research engagements, 2023 to present, across insurance, energy, "
+        "manufacturing and telecommunications.",
+        [
             ("true", "True Corporation", 233),
             ("srithai", "Srithai Superware", 304),
+            ("generali", "Generali Life Assurance Thailand", 465),
         ],
     ),
     (
