@@ -371,6 +371,57 @@ CLIENTS = (
     "Ministry of Culture, Tourism Authority of Thailand, NIA, Apple"
 )
 
+# Organisation marks: nominative use only. Each band names what the organisation
+# actually vouches for, never "clients" or "trusted by", and a mark never appears
+# without the text that says what the relationship was.
+LOGO_BANDS = [
+    (
+        "Work commissioned by",
+        "Research, advisory and consulting engagements, 2019 to 2026.",
+        [
+            ("senate", "Senate of Thailand", 96),
+            ("etda", "Electronic Transactions Development Agency", 268),
+            ("pdpc", "Office of the Personal Data Protection Committee", 184),
+            ("dpim", "Department of Primary Industries and Mines", 85),
+            ("true", "True Corporation", 263),
+            ("srithai", "Srithai Superware", 367),
+        ],
+    ),
+    (
+        "Studied at",
+        "",
+        [
+            ("utcc", "University of the Thai Chamber of Commerce", 240),
+            ("smu", "Southern Methodist University", 327),
+        ],
+    ),
+]
+
+LOGO_NOTE = (
+    "Organisation marks identify the institutions and companies I have worked for or studied "
+    "at. All marks remain the property of their owners. Their appearance here does not imply "
+    "endorsement, partnership or certification."
+)
+
+
+def logo_bands() -> str:
+    # Emblems read smaller than wordmarks at the same cap height, so the two
+    # seal-shaped marks get a few extra pixels to hold their optical weight.
+    emblems = {"senate", "dpim"}
+    out = []
+    for heading, sub, items in LOGO_BANDS:
+        imgs = "".join(
+            f'<img src="assets/logos/{key}.png" alt="{e(name)}" width="{w}" height="96" '
+            f'class="{"emblem" if key in emblems else "wordmark"}" '
+            f'loading="lazy" decoding="async">'
+            for key, name, w in items
+        )
+        line = (f'<p style="margin:-10px 0 20px;font-size:14px;color:var(--muted)">{e(sub)}</p>'
+                if sub else "")
+        out.append(f'<div class="band"><h3>{e(heading)}</h3>{line}'
+                   f'<div class="logos">{imgs}</div></div>')
+    return "".join(out)
+
 # ---------------------------------------------------------------------- css
 CSS = """
 :root{
@@ -407,7 +458,11 @@ p{margin:0 0 1em}
 .nav{display:flex;gap:26px;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
 .nav a{border:0}
 .nav a[aria-current]{color:var(--ink)}
-@media (max-width:720px){ .nav{display:none} }
+@media (max-width:720px){
+  .masthead .wrap{height:auto;flex-wrap:wrap;padding:14px 0 6px;row-gap:6px}
+  .nav{display:flex;width:100%;justify-content:flex-start;gap:22px;font-size:12px}
+  .nav a{padding:11px 0;display:inline-block}
+}
 
 /* hero */
 .hero{padding:84px 0 64px;border-bottom:1px solid var(--line)}
@@ -500,6 +555,24 @@ footer{padding:56px 0 64px}
 .links{display:flex;flex-wrap:wrap;gap:8px 22px;font-size:13px;letter-spacing:.06em;justify-content:flex-end}
 .fine{margin-top:36px;padding-top:20px;border-top:1px solid var(--line);font-size:12px;color:var(--muted);display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
 @media (max-width:720px){ .foot{grid-template-columns:1fr} .links{justify-content:flex-start} }
+
+/* organisation band */
+.band{padding:30px 0 26px;border-bottom:1px solid var(--line)}
+.band + .band{border-bottom:0;padding-top:0}
+.band h3{font-size:11.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);
+  font-family:var(--sans);margin:0 0 20px}
+.logos{display:flex;flex-wrap:wrap;align-items:center;gap:26px 40px}
+.logos img{width:auto;filter:grayscale(1);opacity:.78}
+.logos img.wordmark{height:30px}
+.logos img.emblem{height:40px}
+.logos img:hover{opacity:1}
+@media (prefers-color-scheme:dark){ .logos img{filter:grayscale(1) invert(1);opacity:.7} }
+@media (max-width:620px){
+  .logos{gap:20px 26px}
+  .logos img.wordmark{height:26px}
+  .logos img.emblem{height:34px}
+}
+.note{font-size:12.5px;line-height:1.6;color:var(--muted);margin:22px 0 0;max-width:62ch}
 
 /* print */
 @media print{
@@ -722,6 +795,13 @@ def page_index() -> str:
   </div>
 
   <div class="wrap"><div class="stats">{stats}</div></div>
+
+  <section style="padding:34px 0 30px">
+    <div class="wrap">
+      {logo_bands()}
+      <p class="note">{e(LOGO_NOTE)}</p>
+    </div>
+  </section>
 
   <section>
     <div class="wrap">
