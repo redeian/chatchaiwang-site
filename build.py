@@ -389,14 +389,6 @@ ENGAGEMENTS = [
         ),
     ),
     dict(
-        org="B.Grimm Power",
-        meta="AI champion programme &middot; 2024 to present",
-        body=(
-            "Training, capacity building and pitching for about thirty AI champions. Three to "
-            "five of their projects reach production each year."
-        ),
-    ),
-    dict(
         org="Srithai Superware",
         meta="AI transformation consultant &middot; 2025 to present",
         body=(
@@ -422,6 +414,14 @@ ENGAGEMENTS = [
         ),
         source=("https://e.huawei.com/en/case-studies/industries/education/"
                 "2024-university-of-the-thai-chamber-of-commerce"),
+    ),
+    dict(
+        org="B.Grimm Power",
+        meta="AI champion programme &middot; 2024 to present",
+        body=(
+            "Training, capacity building and pitching for about thirty AI champions. Three to "
+            "five of their projects reach production each year."
+        ),
     ),
 ]
 
