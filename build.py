@@ -491,6 +491,7 @@ LOGO_BANDS = [
             ("true", "True Corporation", 233),
             ("srithai", "Srithai Superware", 304),
             ("generali", "Generali Life Assurance Thailand", 465),
+            ("mtl", "Muang Thai Life Assurance", 156),
             ("bgrimm", "B.Grimm Power", 288),
         ],
     ),
@@ -522,7 +523,7 @@ LOGO_NOTE = (
 def logo_bands(bands=None) -> str:
     # Emblems read smaller than wordmarks at the same cap height, so the two
     # seal-shaped marks get a few extra pixels to hold their optical weight.
-    emblems = {"senate", "dpim", "smu-seal"}
+    emblems = {"senate", "dpim", "smu-seal", "mtl"}
     out = []
     for heading, sub, items in (bands or LOGO_BANDS):
         imgs = "".join(
@@ -1402,8 +1403,8 @@ def page_index_th() -> str:
       <div>
         <p class="eyebrow">กรุงเทพฯ ประเทศไทย</p>
         <h1>ผศ. ดร.ชัชชัย หวังวิวัฒนา</h1>
-        <p class="lede">ผมออกแบบและดูแลระบบที่ทำให้องค์กรใช้ AI ได้ ไม่ใช่ sandbox แต่ต้องขยายผล
-        และวัดผลได้ โดยไม่เสียการควบคุมข้อมูลของตัวเอง สิบแปดปีในงานวิศวกรรมซอฟต์แวร์
+        <p class="lede">AI ไม่ใช่เพียง sandbox แต่ต้องขยายผลและวัดผลได้ โดยไม่เสียการควบคุมข้อมูลของตัวเอง
+        เสริมกำลังบุคลากร ก้าวไปข้างหน้าอย่างมั่นคงยั่งยืน สิบแปดปีในงานวิศวกรรมซอฟต์แวร์
         การนำด้านไอที และงานวิจัยประยุกต์</p>
         <p class="now">รองอธิการบดีฝ่ายเทคโนโลยีสารสนเทศ และอาจารย์ประจำมหาวิทยาลัยหอการค้าไทย
         ผู้ก่อตั้ง <a href="{ACADEMY}" rel="me noopener">Mark Digital Academy</a></p>
