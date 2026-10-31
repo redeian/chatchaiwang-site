@@ -376,6 +376,35 @@ CERTIFICATIONS = [
     ("Certified IoT with NetPie Trainer", "NECTEC, Thailand"),
 ]
 
+# Selected engagements: what was actually delivered, not just the title held.
+ENGAGEMENTS = [
+    dict(
+        org="Generali Life Assurance Thailand",
+        meta="AI transformation consultant, cross-functional initiative &middot; 2026 to present",
+        body=(
+            "Design thinking with eight executives, then four sessions with the company's AI "
+            "champions from idea to working product, closing in a pitch to sponsors. Several "
+            "projects were funded and are in use across sales, customer service, digital marketing "
+            "and data."
+        ),
+    ),
+    dict(
+        org="B.Grimm Power",
+        meta="AI champion programme &middot; 2024 to present",
+        body="Training, capacity building and pitching for about thirty AI champions.",
+    ),
+    dict(
+        org="University of the Thai Chamber of Commerce",
+        meta="Vice President of Information Technology &middot; 2025 to present",
+        body=(
+            "Runs a fifty-person IT organisation across infrastructure, cloud, security, data and "
+            "IT governance, PDPA as data protection officer, the LMS and vendor estate, and the "
+            "university's computers and iPads. Founded the AI centre and led the AI transformation "
+            "that won the ACES Awards 2026."
+        ),
+    ),
+]
+
 CLIENTS = (
     "Krungthai Bank, Generali Life Assurance, Srithai Superware, B. Grimm Power, Singha, "
     "Government Savings Bank, Thai Chamber of Commerce, PDPC, NDSI, Excise Department, NESDC, "
@@ -791,6 +820,11 @@ def page_index() -> str:
         f'<div class="y">{e(years)}</div></div>'
         for title, role, funder, years in sorted(PROJECTS, key=lambda p: project_span(p[3]), reverse=True)
     )
+    eng = "".join(
+        f'<article class="pub"><p class="meta">{x["meta"]}</p>'
+        f'<h3>{e(x["org"])}</h3><p class="venue">{e(x["body"])}</p></article>'
+        for x in ENGAGEMENTS
+    )
     exp = ""
     for group, rows in EXPERIENCE:
         items = "".join(
@@ -851,6 +885,13 @@ def page_index() -> str:
     <div class="wrap">
       <p class="label" style="margin-bottom:22px">Focus</p>
       <div class="cards">{cards}</div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap section-grid">
+      <p class="label">Selected engagements</p>
+      <div>{eng}</div>
     </div>
   </section>
 
