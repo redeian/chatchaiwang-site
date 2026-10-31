@@ -21,7 +21,7 @@ HEIGHT = 96          # 2x a 48 px band height
 PAPER = (245, 242, 234, 255)
 
 WANT = ["senate", "etda", "pdpc", "dpim", "true", "srithai", "tcc", "generali",
-        "depa", "stanford", "oceg", "utcc", "smu", "smu-seal"]
+        "depa", "stanford", "oceg", "utcc", "smu", "smu-lockup"]
 
 # Some sources ship a monochrome seal. Tint it to the organisation's own site
 # blue (#354ca1, taken from smu.edu's stylesheet) rather than leaving it grey.

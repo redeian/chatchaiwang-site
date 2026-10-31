@@ -27,7 +27,7 @@ NAME_TH = "ชัชชัย หวังวิวัฒนา"
 STATS = [
     ("18", "peer-reviewed publications", "2015 to 2026"),
     ("76", "training and speaking programmes", "since 2018"),
-    ("5", "funded research grants", "2023 to 2026, all funded"),
+    ("7", "funded research grants", "2023 to 2026, all funded"),
     ("18", "years in software and IT", "industry and academia"),
 ]
 
@@ -50,6 +50,18 @@ FOCUS = [
 ]
 
 PROJECTS = [
+    (
+        "Agentic AI Driven Programming Assistant for Teachers: Teacher-in-the-Loop Adaptive Learning and Real-Time Feedback",
+        "University research grant",
+        "University of the Thai Chamber of Commerce",
+        "2025",
+    ),
+    (
+        "Large Language Model Chatbot Question and Answer System for Higher Education",
+        "University research grant",
+        "University of the Thai Chamber of Commerce",
+        "2024",
+    ),
     (
         "Applying Digital and AI Technology to the Operational Efficiency of the Senate",
         "Principal Investigator",
@@ -413,7 +425,7 @@ LOGO_BANDS = [
         "Ph.D. and Master of Interactive Technology in Dallas, Texas. First class honours in "
         "computer science in Bangkok.",
         [
-            ("smu-seal", "Southern Methodist University, USA", 96),
+            ("smu-lockup", "Southern Methodist University, USA", 253),
             ("utcc", "University of the Thai Chamber of Commerce", 215),
         ],
     ),
@@ -845,9 +857,9 @@ def page_index() -> str:
     <div class="wrap section-grid">
       <p class="label">Research grants</p>
       <div>
-        <p style="max-width:38em;margin-bottom:22px;font-size:17px">Five grants and commissioned
-        studies since 2023, every one funded by the organisation named — a national legislature, two
-        ministries, a state agency, a regulator and a listed company. Each carries a contract, a
+        <p style="max-width:38em;margin-bottom:22px;font-size:17px">Seven funded research grants
+        since 2023, every one paid for by the body named — a national legislature, two ministries, a
+        state agency, a regulator, a listed company and two university grants. Each carries a
         funded period and a deliverable that had to work.</p>
         <div class="rows">{projects}</div>
       </div>
