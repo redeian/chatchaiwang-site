@@ -10,6 +10,7 @@ from __future__ import annotations
 import html
 import json
 import pathlib
+import re
 import subprocess
 
 SITE = pathlib.Path(__file__).resolve().parent
@@ -775,6 +776,15 @@ def publication_items(items, start: int = 1) -> str:
 
 
 # --------------------------------------------------------------------- pages
+def project_span(years: str) -> tuple[int, int]:
+    """Order grants newest first; an open-ended 2025 to 2026 grant outranks a
+    single-year 2025 one. Parsed from the string so the data can stay unsorted."""
+    found = re.findall(r"(20\d\d)", years)
+    if not found:
+        return (0, 0)
+    return (int(found[0]), int(found[-1]))
+
+
 def page_index() -> str:
     stats = "".join(
         f'<div class="stat"><b>{n}</b><span>{label}</span><i>{note}</i></div>'
@@ -786,7 +796,7 @@ def page_index() -> str:
     projects = "".join(
         f'<div class="row"><div class="t">{e(title)}<small>{e(role)} &middot; {e(funder)}</small></div>'
         f'<div class="y">{e(years)}</div></div>'
-        for title, role, funder, years in PROJECTS
+        for title, role, funder, years in sorted(PROJECTS, key=lambda p: project_span(p[3]), reverse=True)
     )
     exp = ""
     for group, rows in EXPERIENCE:
