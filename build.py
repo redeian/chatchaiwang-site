@@ -404,14 +404,14 @@ ENGAGEMENTS = [
         org="University of the Thai Chamber of Commerce",
         meta="Vice President of Information Technology &middot; 2025 to present",
         body=[
-            "Fifty-person IT organisation, 2,000 computers and 20,000 iPads, and a rebuilt digital "
-            "backbone: data warehouse, cybersecurity, paperless workflow, API-first, data "
-            "governance, martech.",
+            "Initiated the AI UTCC programme that turned the university into an AI-first "
+            "institution: a fifty-person IT organisation, 2,000 computers and 20,000 iPads, and a "
+            "rebuilt digital backbone of data warehouse, cybersecurity, paperless workflow, "
+            "API-first, data governance and martech.",
             "Data protection officer under PDPA. Eight systems built in house at about a fifth of "
             "what outside vendors quoted. No AI servers bought, compute paid for as tokens.",
-            "First education institution in Asia-Pacific on Wi-Fi 7. The university took two ACES "
-            "Awards in 2026, including Premier Educational Institutions in Asia, credited to this "
-            "AI transformation.",
+            "First education institution in Asia-Pacific on Wi-Fi 7. The work led to two ACES "
+            "Awards in 2026, including Premier Educational Institutions in Asia.",
         ],
         sources=[
             ("https://e.huawei.com/en/case-studies/industries/education/"
@@ -898,7 +898,7 @@ def page_index() -> str:
       </div>
       <figure class="portrait">
         <picture>
-          <source srcset="assets/img/portrait-480.webp 480w, /assets/img/portrait-960.webp 960w"
+          <source srcset="assets/img/portrait-480.webp 480w, assets/img/portrait-960.webp 960w"
                   sizes="(max-width:860px) 320px, 360px" type="image/webp">
           <img src="assets/img/portrait-960.jpg" width="960" height="1200"
                alt="Portrait of Chatchai Wangwiwattana"
