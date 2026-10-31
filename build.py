@@ -397,6 +397,17 @@ ENGAGEMENTS = [
         ),
     ),
     dict(
+        org="Srithai Superware",
+        meta="AI transformation consultant &middot; 2025 to present",
+        body=(
+            "Set up their AI champion programme and the transformation that followed. Around a "
+            "hundred executives trained, then champion cohorts who went on to train the whole "
+            "factory themselves. Eighteen projects are now in production across digital, data and "
+            "AI, digital twin work included, after a hackathon and a pitch round. Their programmers "
+            "were upskilled on using AI safely and under governance."
+        ),
+    ),
+    dict(
         org="University of the Thai Chamber of Commerce",
         meta="Vice President of Information Technology &middot; 2025 to present",
         body=(
