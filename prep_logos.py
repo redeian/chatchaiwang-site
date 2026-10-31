@@ -21,25 +21,49 @@ HEIGHT = 96          # 2x a 48 px band height
 PAPER = (245, 242, 234, 255)
 
 WANT = ["senate", "etda", "pdpc", "dpim", "true", "srithai", "tcc",
-        "depa", "stanford", "oceg", "utcc", "smu"]
+        "depa", "stanford", "oceg", "utcc", "smu", "smu-seal"]
 
 
 def trim(im: Image.Image) -> Image.Image:
+    """Crop to the ink, then add a small transparent margin so no mark sits flush
+    against its neighbour in the row — a file drawn to its own canvas edge
+    otherwise reads as a sliced logo."""
     im = im.convert("RGBA")
     bbox = im.getbbox()
-    return im.crop(bbox) if bbox else im
+    if not bbox:
+        return im
+    core = im.crop(bbox)
+    pad = max(2, int(round(max(core.size) * 0.04)))
+    canvas = Image.new("RGBA", (core.width + pad * 2, core.height + pad * 2), (0, 0, 0, 0))
+    canvas.alpha_composite(core, (pad, pad))
+    return canvas
 
 
 def from_svg(path: pathlib.Path) -> Image.Image:
+    """Render at the file's own pixel size. Opening the SVG directly lets Chrome
+    centre and crop anything wider than the window, which silently sliced a mark."""
+    head = path.read_text(encoding="utf-8", errors="ignore")[:600]
+    import re
+    m = re.search(r'width="([\d.]+)"\s+height="([\d.]+)"', head) or \
+        re.search(r'viewBox="0 0 ([\d.]+) ([\d.]+)"', head)
+    w, h = (float(m.group(1)), float(m.group(2))) if m else (1200.0, 600.0)
+    scale = min(1.0, 1600.0 / max(w, h))
+    w, h = max(1, int(w * scale)), max(1, int(h * scale))
+    tmp_html = OUT / f".{path.stem}.html"
     tmp = OUT / f".{path.stem}.png"
+    tmp_html.write_text(
+        "<html><body style='margin:0;background:transparent'>"
+        f"<img src='{path.as_uri()}' width='{w}' height='{h}' style='display:block'>"
+        "</body></html>", encoding="utf-8")
     subprocess.run(
         [CHROME, "--headless=new", "--hide-scrollbars", "--disable-gpu",
          "--default-background-color=00000000", "--force-device-scale-factor=1",
-         "--window-size=1200,600", f"--screenshot={tmp}", str(path)],
+         f"--window-size={w},{h}", f"--screenshot={tmp}", str(tmp_html)],
         check=True, capture_output=True,
     )
     im = Image.open(tmp).convert("RGBA").copy()
     tmp.unlink(missing_ok=True)
+    tmp_html.unlink(missing_ok=True)
     return trim(im)
 
 
@@ -73,20 +97,6 @@ def main():
             continue
         k = HEIGHT / im.height
         out = im.resize((max(1, round(im.width * k)), HEIGHT), Image.LANCZOS)
-        # white-only marks disappear on paper; flatten anything that is mostly
-        # transparent ink into a dark tone so it survives the grayscale filter
-        px = out.load()
-        dark = sum(1 for y in range(0, out.height, 3) for x in range(0, out.width, 3)
-                   if px[x, y][3] > 40 and (px[x, y][0] + px[x, y][1] + px[x, y][2]) / 3 > 200)
-        total = sum(1 for y in range(0, out.height, 3) for x in range(0, out.width, 3)
-                    if px[x, y][3] > 40)
-        if total and dark / total > 0.75:
-            for y in range(out.height):
-                for x in range(out.width):
-                    r, g, b, a = px[x, y]
-                    if a > 40:
-                        px[x, y] = (40, 38, 34, a)
-            print("recoloured light mark", key)
         out.save(OUT / f"{key}.png", optimize=True)
         made.append((key, out.size, (OUT / f"{key}.png").stat().st_size))
     for key, size, nbytes in made:

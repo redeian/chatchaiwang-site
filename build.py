@@ -382,20 +382,20 @@ LOGO_BANDS = [
         "commissioned and paid for by the organisation named.",
         [
             ("senate", "Senate of Thailand", 96),
-            ("etda", "Electronic Transactions Development Agency", 268),
-            ("pdpc", "Office of the Personal Data Protection Committee", 184),
-            ("dpim", "Department of Primary Industries and Mines", 85),
-            ("tcc", "Thai Chamber of Commerce", 410),
-            ("true", "True Corporation", 263),
-            ("srithai", "Srithai Superware", 367),
+            ("etda", "Electronic Transactions Development Agency", 314),
+            ("pdpc", "Office of the Personal Data Protection Committee", 172),
+            ("dpim", "Department of Primary Industries and Mines", 86),
+            ("tcc", "Thai Chamber of Commerce", 331),
+            ("true", "True Corporation", 233),
+            ("srithai", "Srithai Superware", 304),
         ],
     ),
     (
         "Certified by",
         "Trainer and practitioner certifications held in Thailand, Singapore and the United States.",
         [
-            ("depa", "Digital Economy Promotion Agency", 162),
-            ("oceg", "OCEG, Singapore", 290),
+            ("depa", "Digital Economy Promotion Agency", 154),
+            ("oceg", "OCEG, Singapore", 252),
         ],
     ),
     (
@@ -403,8 +403,8 @@ LOGO_BANDS = [
         "Ph.D. and Master of Interactive Technology in Dallas, Texas. First class honours in "
         "computer science in Bangkok.",
         [
-            ("smu", "Southern Methodist University, USA", 327),
-            ("utcc", "University of the Thai Chamber of Commerce", 240),
+            ("smu-seal", "Southern Methodist University, USA", 96),
+            ("utcc", "University of the Thai Chamber of Commerce", 215),
         ],
     ),
 ]
@@ -419,7 +419,7 @@ LOGO_NOTE = (
 def logo_bands() -> str:
     # Emblems read smaller than wordmarks at the same cap height, so the two
     # seal-shaped marks get a few extra pixels to hold their optical weight.
-    emblems = {"senate", "dpim"}
+    emblems = {"senate", "dpim", "smu-seal"}
     out = []
     for heading, sub, items in LOGO_BANDS:
         imgs = "".join(
