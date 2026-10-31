@@ -380,13 +380,18 @@ CERTIFICATIONS = [
 # Selected engagements: what was actually delivered, not just the title held.
 ENGAGEMENTS = [
     dict(
-        org="Generali Life Assurance Thailand",
-        meta="AI transformation consultant, cross-functional initiative &middot; 2026, completed",
+        org="University of the Thai Chamber of Commerce",
+        meta="Vice President of Information Technology &middot; 2025 to present",
         body=[
-            "Design thinking with the executive team, then four rounds with their AI champions "
-            "from idea to working product, closing in a pitch to sponsors.",
-            "The projects that won funding are in use across sales, customer service, digital "
-            "marketing and data.",
+            "Initiated the AI UTCC programme that turned the university into an AI-first "
+            "institution: a fifty-person IT organisation, 2,000 computers and 20,000 iPads, and a "
+            "rebuilt digital backbone of data warehouse, cybersecurity, paperless workflow, "
+            "API-first, data governance and martech.",
+            "Data protection officer under PDPA. More than twenty systems built in house; the eight "
+            "AI ones at about a fifth of what outside vendors quoted. No AI servers bought, compute "
+            "paid for as tokens.",
+            "First education institution in Asia-Pacific on Wi-Fi 7. The work led to two ACES "
+            "Awards in 2026, including Premier Educational Institutions in Asia.",
         ],
     ),
     dict(
@@ -402,25 +407,13 @@ ENGAGEMENTS = [
         ],
     ),
     dict(
-        org="University of the Thai Chamber of Commerce",
-        meta="Vice President of Information Technology &middot; 2025 to present",
+        org="Generali Life Assurance Thailand",
+        meta="AI transformation consultant, cross-functional initiative &middot; 2026, completed",
         body=[
-            "Initiated the AI UTCC programme that turned the university into an AI-first "
-            "institution: a fifty-person IT organisation, 2,000 computers and 20,000 iPads, and a "
-            "rebuilt digital backbone of data warehouse, cybersecurity, paperless workflow, "
-            "API-first, data governance and martech.",
-            "Data protection officer under PDPA. More than twenty systems built in house; the eight "
-            "AI ones at about a fifth of what outside vendors quoted. No AI servers bought, compute "
-            "paid for as tokens.",
-            "First education institution in Asia-Pacific on Wi-Fi 7. The work led to two ACES "
-            "Awards in 2026, including Premier Educational Institutions in Asia.",
-        ],
-        sources=[
-            ("https://e.huawei.com/en/case-studies/industries/education/"
-             "2024-university-of-the-thai-chamber-of-commerce",
-             "Source: Huawei case study, first Wi-Fi 7 education deployment in Asia-Pacific"),
-            ("https://www.utcc.ac.th/utcc-president-thanavath-aces-awards-2026/",
-             "Source: UTCC on the 2026 ACES Awards"),
+            "Design thinking with the executive team, then four rounds with their AI champions "
+            "from idea to working product, closing in a pitch to sponsors.",
+            "The projects that won funding are in use across sales, customer service, digital "
+            "marketing and data.",
         ],
     ),
     dict(
