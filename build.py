@@ -12,6 +12,7 @@ import json
 import pathlib
 import re
 import subprocess
+import sys
 
 SITE = pathlib.Path(__file__).resolve().parent
 BASE = "https://chatchaiwang.com"
@@ -1181,6 +1182,13 @@ def main() -> None:
     print("wrote sitemap.xml, robots.txt, site.webmanifest, .nojekyll")
 
     build_og()
+
+    # The CV PDF is derived from the same data, so it is rebuilt here rather
+    # than left to drift. A separate process keeps the two modules from
+    # importing each other.
+    cv = SITE / "build_cv.py"
+    if cv.exists():
+        subprocess.run([sys.executable, str(cv)], check=True, cwd=str(SITE))
 
 
 if __name__ == "__main__":

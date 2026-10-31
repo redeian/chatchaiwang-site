@@ -4,3 +4,5 @@
 .og.html
 __pycache__/
 .DS_Store
+.cv.html
+.cv-*.png
