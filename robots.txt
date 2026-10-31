@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://redeian.github.io/chatchaiwang-site/sitemap.xml
+Sitemap: https://www.chatchaiwang.com/sitemap.xml
