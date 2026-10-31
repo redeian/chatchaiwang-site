@@ -52,14 +52,14 @@ FOCUS = [
 PROJECTS = [
     (
         "Agentic AI Driven Programming Assistant for Teachers: Teacher-in-the-Loop Adaptive Learning and Real-Time Feedback",
-        "University research grant",
-        "University of the Thai Chamber of Commerce",
+        "Principal Investigator",
+        "University research grant, University of the Thai Chamber of Commerce",
         "2025",
     ),
     (
         "Large Language Model Chatbot Question and Answer System for Higher Education",
-        "University research grant",
-        "University of the Thai Chamber of Commerce",
+        "Principal Investigator",
+        "University research grant, University of the Thai Chamber of Commerce",
         "2024",
     ),
     (
@@ -410,6 +410,7 @@ LOGO_BANDS = [
             ("true", "True Corporation", 233),
             ("srithai", "Srithai Superware", 304),
             ("generali", "Generali Life Assurance Thailand", 465),
+            ("bgrimm", "B.Grimm Power", 288),
         ],
     ),
     (
