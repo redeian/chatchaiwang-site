@@ -454,7 +454,7 @@ ENGAGEMENTS = [
     ),
     dict(
         org="Muang Thai Life Assurance",
-        meta="AI transformation consultant &middot; agentic AI for software delivery",
+        meta="AI transformation consultant &middot; 2026, completed",
         body=(
             "Moved an enterprise IT team to agentic AI end to end: reading and decoding the "
             "business first, then building applications for a large organisation and setting the "
@@ -1335,7 +1335,7 @@ TH_ENGAGEMENTS = [
     ),
     dict(
         org="เมืองไทยประกันชีวิต",
-        meta="ที่ปรึกษา AI transformation",
+        meta="ที่ปรึกษา AI transformation &middot; 2026 เสร็จสิ้น",
         body=("ยกระดับทีมไอทีไปสู่ Agentic AI ตั้งแต่การเข้าใจและถอดรหัสธุรกิจ ไปจนถึงการพัฒนาโปรแกรม "
               "สำหรับองค์กรขนาดใหญ่ วางโครงสร้าง Agentic AI for software development "
               "การทดสอบระบบ และการบำรุงรักษา ครบทั้งกระบวนการ"),
