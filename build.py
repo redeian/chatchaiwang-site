@@ -28,8 +28,8 @@ NAME_TH = "ชัชชัย หวังวิวัฒนา"
 STATS = [
     ("18", "peer-reviewed publications", "2015 to 2026"),
     ("76", "training and speaking programmes", "since 2018"),
-    ("18", "AI and data projects in production", "with Srithai Superware"),
-    ("80%", "cheaper than buying the same systems", "3 million a year against a 15 million quote"),
+    ("8", "AI and software systems built in house", "at the university, running today"),
+    ("80%", "below the vendor quote", "in-house build at the university"),
 ]
 
 FOCUS = [
@@ -381,23 +381,23 @@ ENGAGEMENTS = [
     dict(
         org="Generali Life Assurance Thailand",
         meta="AI transformation consultant, cross-functional initiative &middot; 2026, completed",
-        body=(
-            "Design thinking with eight executives, then four sessions with the company's AI "
-            "champions from idea to working product, closing in a pitch to sponsors. Several "
-            "projects were funded and are in use across sales, customer service, digital marketing "
-            "and data."
-        ),
+        body=[
+            "Design thinking with the executive team, then four rounds with their AI champions "
+            "from idea to working product, closing in a pitch to sponsors.",
+            "The projects that won funding are in use across sales, customer service, digital "
+            "marketing and data.",
+        ],
     ),
     dict(
         org="Srithai Superware",
         meta="AI transformation consultant &middot; 2025 to present",
         body=[
             "Set up their AI champion programme and the transformation that followed.",
-            "Around a hundred executives trained, then champion cohorts who went on to train the "
-            "whole factory themselves.",
-            "Eighteen projects in production across digital, data and AI, digital twin work "
-            "included, after a hackathon and a pitch round. Their programmers were upskilled on "
-            "using AI safely and under governance.",
+            "Executives trained first, then champion cohorts who went on to train the whole "
+            "factory themselves.",
+            "Projects now running across digital, data and AI, digital twin work included, after a "
+            "hackathon and a pitch round. Their programmers upskilled on using AI safely and under "
+            "governance.",
         ],
     ),
     dict(
@@ -407,22 +407,26 @@ ENGAGEMENTS = [
             "Fifty-person IT organisation, 2,000 computers and 20,000 iPads, and a rebuilt digital "
             "backbone: data warehouse, cybersecurity, paperless workflow, API-first, data "
             "governance, martech.",
-            "Data protection officer under PDPA. Eight systems built in house for about 3 million "
-            "baht a year against a vendor quote of about 15 million. No AI servers bought, compute "
-            "paid for as tokens.",
-            "First education institution in Asia-Pacific on Wi-Fi 7. Three ACES Awards, including "
-            "Premier Education in ASEAN.",
+            "Data protection officer under PDPA. Eight systems built in house at about a fifth of "
+            "what outside vendors quoted. No AI servers bought, compute paid for as tokens.",
+            "First education institution in Asia-Pacific on Wi-Fi 7. The university took two ACES "
+            "Awards in 2026, including Premier Educational Institutions in Asia, credited to this "
+            "AI transformation.",
         ],
-        source=("https://e.huawei.com/en/case-studies/industries/education/"
-                "2024-university-of-the-thai-chamber-of-commerce"),
-        source_label="Source: Huawei case study, first Wi-Fi 7 education deployment in Asia-Pacific",
+        sources=[
+            ("https://e.huawei.com/en/case-studies/industries/education/"
+             "2024-university-of-the-thai-chamber-of-commerce",
+             "Source: Huawei case study, first Wi-Fi 7 education deployment in Asia-Pacific"),
+            ("https://www.utcc.ac.th/utcc-president-thanavath-aces-awards-2026/",
+             "Source: UTCC on the 2026 ACES Awards"),
+        ],
     ),
     dict(
         org="B.Grimm Power",
         meta="AI champion programme &middot; 2024 to 2026",
         body=(
-            "Training, capacity building and pitching for about thirty AI champions. Three to "
-            "five of their projects reach production each year."
+            "Training, capacity building and pitching for their AI champions, with projects "
+            "reaching production each year."
         ),
     ),
 ]
@@ -834,10 +838,10 @@ def engagement_body(x: dict) -> str:
     out = "".join(
         f'<p class="venue" style="margin:0 0 11px">{e(line)}</p>' for line in lines
     )
-    if x.get("source"):
-        label = e(x.get("source_label", "Source"))
-        out += (f'<p class="venue" style="margin:2px 0 0">'
-                f'<a class="doi" href="{x["source"]}" rel="noopener">{label}</a></p>')
+    if x.get("sources"):
+        for url, label in x["sources"]:
+            out += (f'<p class="venue" style="margin:2px 0 0">'
+                    f'<a class="doi" href="{url}" rel="noopener">{e(label)}</a></p>')
     return out
 
 
