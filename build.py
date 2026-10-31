@@ -91,6 +91,7 @@ EXPERIENCE = [
             ("Head, Bachelor's Degree Program in Gaming and Esports Business", "University of the Thai Chamber of Commerce", "2023 to 2026"),
             ("Assistant to the President for Information Technology", "University of the Thai Chamber of Commerce", "2018 to 2025"),
             ("Lecturer, Faculty of Science and Technology", "University of the Thai Chamber of Commerce", "2018 to present"),
+            ("Assistant Professor", "University of the Thai Chamber of Commerce", "current rank"),
             ("Special Lecturer, Information Technology", "Mahidol University", "2017 to 2019"),
         ],
     ),
@@ -689,6 +690,7 @@ def person_jsonld() -> str:
         "@id": BASE + "/#person",
         "name": NAME,
         "alternateName": [NAME_TH, "Chatchai Mark Wangwiwattana"],
+        "honorificPrefix": "Asst. Prof.",
         "honorificSuffix": "Ph.D.",
         "jobTitle": "Vice President of Information Technology",
         "description": (
@@ -774,9 +776,9 @@ def page_index() -> str:
         control of their data. Two decades across software engineering, IT leadership and applied
         research, delivered for a national senate, a data-protection regulator, and universities
         that cannot afford to guess.</p>
-        <p class="now">Currently Vice President of Information Technology at the University of the
-        Thai Chamber of Commerce, and a member of the Business and Service Standards Certification
-        Committee at the Thai Chamber of Commerce.</p>
+        <p class="now">Currently Vice President of Information Technology and Assistant Professor at the
+        University of the Thai Chamber of Commerce, and a member of the Business and Service
+        Standards Certification Committee at the Thai Chamber of Commerce.</p>
         <div class="actions">
           <a class="btn" href="mailto:{EMAIL}">Start a conversation</a>
           <a class="btn ghost" href="assets/cv.pdf">Download CV</a>
