@@ -818,8 +818,9 @@ def foot_block(lang: str = "en", prefix: str = "") -> str:
         links.append((HUB, "About หมาก ดิจิทัล"))
         links.append((f"{prefix}assets/cv.pdf", "CV, PDF"))
         fine_left, fine_right = f"&copy; 2026 {NAME}. Bangkok, Thailand.", "Static page. No trackers, no cookies."
-    rendered = "".join(f'<a href="{h}"{" rel=\"me noopener\"" if h.startswith("http") else ""}>{label}</a>'
-                       for h, label in links)
+    rendered = "".join(
+        '<a href="%s"%s>%s</a>' % (h, ' rel="me noopener"' if h.startswith("http") else "", label)
+        for h, label in links)
     return f"""
 <footer>
   <div class="wrap">
@@ -1607,14 +1608,19 @@ def main() -> None:
     (SITE / ".nojekyll").write_text("", encoding="utf-8")
     print("wrote sitemap.xml, robots.txt, site.webmanifest, .nojekyll")
 
-    build_og()
+    if pathlib.Path(CHROME).exists():
+        build_og()
+    else:
+        print("Chrome not found; keeping existing assets/og.png")
 
     # The CV PDF is derived from the same data, so it is rebuilt here rather
     # than left to drift. A separate process keeps the two modules from
     # importing each other.
     cv = SITE / "build_cv.py"
-    if cv.exists():
+    if cv.exists() and pathlib.Path(CHROME).exists():
         subprocess.run([sys.executable, str(cv)], check=True, cwd=str(SITE))
+    else:
+        print("Chrome not found; keeping existing assets/cv.pdf")
 
 
 if __name__ == "__main__":
