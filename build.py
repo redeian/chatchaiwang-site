@@ -19,6 +19,7 @@ BASE = "https://www.chatchaiwang.com"
 EMAIL = "chatchai_wan@utcc.ac.th"
 LINKEDIN = "https://linkedin.com/in/chatchai-mark-wangwiwattana-ph-d-8659b230"
 YOUTUBE = "https://www.youtube.com/@markdigitalacademy"
+ACADEMY = "https://markdigitalacademy.com/"
 CHROME = "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"
 
 NAME = "Chatchai Wangwiwattana"
@@ -757,7 +758,7 @@ def foot_block(lang: str = "en", prefix: str = "") -> str:
             "สามทางที่เริ่มได้ ทบทวนธรรมาภิบาล AI ให้องค์กรของคุณ หลักสูตรผู้บริหารสำหรับทีมผู้นำ "
             "และโครงการ AI Champions 90 วันที่ทำให้คนของคุณเดินระบบเองได้")
         links = [(f"mailto:{EMAIL}", EMAIL), (LINKEDIN, "LinkedIn"),
-                 (YOUTUBE, "Mark Digital Academy"), (f"{prefix}assets/cv.pdf", "CV, PDF")]
+                 (ACADEMY, "Mark Digital Academy"), (f"{prefix}assets/cv.pdf", "CV, PDF")]
         fine_left, fine_right = f"&copy; 2026 {NAME} กรุงเทพฯ ประเทศไทย", "หน้าเว็บ static ไม่มีตัวติดตาม ไม่มีคุกกี้"
     else:
         heading, blurb = "Work with me", (
@@ -765,7 +766,7 @@ def foot_block(lang: str = "en", prefix: str = "") -> str:
             "for the leadership team. A ninety-day AI champion programme that leaves your own people "
             "able to run it.")
         links = [(f"mailto:{EMAIL}", EMAIL), (LINKEDIN, "LinkedIn"),
-                 (YOUTUBE, "Mark Digital Academy"), (f"{prefix}assets/cv.pdf", "CV, PDF")]
+                 (ACADEMY, "Mark Digital Academy"), (f"{prefix}assets/cv.pdf", "CV, PDF")]
         fine_left, fine_right = f"&copy; 2026 {NAME}. Bangkok, Thailand.", "Static page. No trackers, no cookies."
     rendered = "".join(f'<a href="{h}"{" rel=\"me noopener\"" if h.startswith("http") else ""}>{label}</a>'
                        for h, label in links)
@@ -816,7 +817,8 @@ def person_jsonld() -> str:
             {
                 "@type": "Organization",
                 "name": "Mark Digital Academy",
-                "url": YOUTUBE,
+                "url": ACADEMY,
+                "sameAs": [YOUTUBE],
             },
         ],
         "alumniOf": [
@@ -1029,7 +1031,7 @@ def page_index() -> str:
         research.</p>
         <p class="now">Vice President of Information Technology and Assistant Professor at the
         University of the Thai Chamber of Commerce, and founder of
-        <a href="https://www.youtube.com/@markdigitalacademy" rel="me noopener">Mark Digital Academy</a>.</p>
+        <a href="{ACADEMY}" rel="me noopener">Mark Digital Academy</a>.</p>
         <div class="actions">
           <a class="btn" href="mailto:{EMAIL}">Start a conversation</a>
           <a class="btn ghost" href="assets/cv.pdf">Download CV</a>
@@ -1380,7 +1382,7 @@ def page_index_th() -> str:
         <p class="lede">ผมออกแบบและดูแลระบบที่ทำให้องค์กรใช้ AI ได้โดยไม่เสียการควบคุมข้อมูลของตัวเอง
         สิบแปดปีในงานวิศวกรรมซอฟต์แวร์ การนำด้านไอที และงานวิจัยประยุกต์</p>
         <p class="now">รองอธิการบดีฝ่ายเทคโนโลยีสารสนเทศ และอาจารย์ประจำมหาวิทยาลัยหอการค้าไทย
-        ผู้ก่อตั้ง <a href="https://www.youtube.com/@markdigitalacademy" rel="me noopener">Mark Digital Academy</a></p>
+        ผู้ก่อตั้ง <a href="{ACADEMY}" rel="me noopener">Mark Digital Academy</a></p>
         <div class="actions">
           <a class="btn" href="mailto:{EMAIL}">พูดคุยกัน</a>
           <a class="btn ghost" href="{prefix}assets/cv.pdf">ดาวน์โหลด CV</a>
