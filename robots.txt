@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://chatchaiwang.com/sitemap.xml
+Sitemap: https://www.chatchaiwang.com/sitemap.xml
