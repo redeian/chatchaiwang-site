@@ -401,12 +401,16 @@ ENGAGEMENTS = [
         meta="Vice President of Information Technology &middot; 2025 to present",
         body=(
             "Runs a fifty-person IT organisation and 22,000 devices, 2,000 computers and 20,000 "
-            "iPads. Led the paperless transformation, the API-first policy and the data governance "
-            "framework, and built eight AI and software systems in house for about 3 million baht "
-            "a year against roughly 15 million quoted from outside. Token-based AI infrastructure "
-            "rather than a data centre, and the first university in ASEAN on WiFi 7. Three ACES "
-            "Awards, including Premier Education in ASEAN."
+            "iPads, and rebuilt the university's digital backbone: data warehouse, cybersecurity, "
+            "paperless workflow, API-first policy, data governance, and the marketing technology "
+            "behind its digital channels. Data protection officer under PDPA. Eight of those "
+            "systems are built in house for about 3 million baht a year against roughly 15 million "
+            "quoted from outside, and AI runs on tokens rather than a data centre. First education "
+            "institution in Asia-Pacific on Wi-Fi 7. Three ACES Awards, including Premier Education "
+            "in ASEAN."
         ),
+        source=("https://e.huawei.com/en/case-studies/industries/education/"
+                "2024-university-of-the-thai-chamber-of-commerce"),
     ),
 ]
 
@@ -827,7 +831,9 @@ def page_index() -> str:
     )
     eng = "".join(
         f'<article class="pub"><p class="meta">{x["meta"]}</p>'
-        f'<h3>{e(x["org"])}</h3><p class="venue">{e(x["body"])}</p></article>'
+        f'<h3>{e(x["org"])}</h3><p class="venue">{e(x["body"])}'
+        + (f' <a class="doi" href="{x["source"]}" rel="noopener">Source</a>' if x.get("source") else "")
+        + "</p></article>"
         for x in ENGAGEMENTS
     )
     exp = ""
