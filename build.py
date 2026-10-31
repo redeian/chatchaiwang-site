@@ -101,7 +101,7 @@ EXPERIENCE = [
             ("Head, Bachelor's Degree Program in Gaming and Esports Business", "University of the Thai Chamber of Commerce", "2023 to 2026"),
             ("Assistant to the President for Information Technology", "University of the Thai Chamber of Commerce", "2018 to 2025"),
             ("Lecturer, Faculty of Science and Technology", "University of the Thai Chamber of Commerce", "2018 to present"),
-            ("Assistant Professor", "University of the Thai Chamber of Commerce", "current rank"),
+            ("Assistant Professor", "University of the Thai Chamber of Commerce", "2023 to present"),
             ("Special Lecturer, Information Technology", "Mahidol University", "2017 to 2019"),
         ],
     ),
@@ -111,13 +111,11 @@ EXPERIENCE = [
             ("AI Transformation Consultant, cross-functional initiative", "Generali Life Assurance (Thailand)", "2026 to present"),
             ("AI Transformation Consultant, AI champion projects, training and design thinking", "B.Grimm Power", "2024 to present"),
             ("AI Transformation Consultant", "Srithai Superware", "2025 to present"),
-            ("Founder", "Demon Wagon Game Studio, USA", "2010 to 2018"),
-            ("Chief Information Officer", "Profitarrowmarketing, LLC, USA", "2016 to 2017"),
-            ("Consultant, Master Plan for Personal Data Protection", "Office of the PDPC", "2021"),
+            ("Founder and Chief Technology Officer", "Demon Wagon Game Studio, with earlier software and CIO roles at Profitarrowmarketing, Southern Methodist University and CPF IT Center", "2008 to 2018"),
+            ("Consultant, Master Plan for Personal Data Protection", "Office of the Personal Data Protection Committee", "2021"),
             ("Expert in Artificial Intelligence and Cloud Architecture", "AiTi, University of the Thai Chamber of Commerce", "2017 to 2020"),
-            ("Special Specialist, Information and Digital Transformation", "Department of Basic Industries and Mines, Ministry of Industry", "2019 to 2020"),
+            ("Special Specialist, Information and Digital Transformation", "Department of Primary Industries and Mines, Ministry of Industry", "2019 to 2020"),
             ("Digital Transformation Consultant", "SME Next Normal Project, Thai Chamber of Commerce", "2022"),
-            ("Software Developer", "Southern Methodist University and CPF IT Center", "2008 to 2016"),
         ],
     ),
 ]
@@ -381,7 +379,7 @@ CERTIFICATIONS = [
 CLIENTS = (
     "Krungthai Bank, Generali Life Assurance, Srithai Superware, B. Grimm Power, Singha, "
     "Government Savings Bank, Thai Chamber of Commerce, PDPC, NDSI, Excise Department, NESDC, "
-    "Ministry of Culture, Tourism Authority of Thailand, NIA, Apple"
+    "Ministry of Culture, Tourism Authority of Thailand, NIA"
 )
 
 # Organisation marks: nominative use only. Each band names what the organisation
@@ -635,7 +633,7 @@ def head(title: str, desc: str, path: str, extra: str = "") -> str:
     preload = ""
     if path == "/":
         preload = ('<link rel="preload" as="image" type="image/webp" '
-                   'imagesrcset="assets/img/portrait-480.webp 480w, /assets/img/portrait-960.webp 960w" '
+                   'imagesrcset="assets/img/portrait-480.webp 480w, assets/img/portrait-960.webp 960w" '
                    'imagesizes="(max-width:860px) 320px, 360px" fetchpriority="high">\n')
     return f"""<!doctype html>
 <html lang="en">
@@ -696,8 +694,9 @@ def foot_block() -> str:
     <div class="foot">
       <div>
         <h2>Work with me</h2>
-        <p>Advisory, executive programmes and applied research on AI, data governance and digital
-        transformation. Based in Bangkok, working across Asia and online.</p>
+        <p>Three ways in. An AI governance baseline for your institution. An executive programme
+        for the leadership team. A ninety-day AI champion programme that leaves your own people
+        able to run it.</p>
       </div>
       <div class="links">
         <a href="mailto:{EMAIL}">{EMAIL}</a>
@@ -816,7 +815,7 @@ def page_index() -> str:
         <p class="eyebrow">Bangkok, Thailand</p>
         <h1>Asst. Prof. {NAME}, Ph.D.</h1>
         <p class="lede">I design and run the systems that let institutions use AI without losing
-        control of their data. Twenty years across software engineering, IT leadership and applied
+        control of their data. Eighteen years across software engineering, IT leadership and applied
         research.</p>
         <p class="now">Vice President of Information Technology and Assistant Professor at the
         University of the Thai Chamber of Commerce.</p>
