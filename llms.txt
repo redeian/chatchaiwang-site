@@ -1,0 +1,36 @@
+# Chatchai Wangwiwattana, Ph.D.
+
+> Technology executive and academic in Bangkok. Applied AI, data governance and
+> digital transformation for institutions that cannot afford to fail. Eighteen
+> peer-reviewed publications, seventy-six executive programmes since 2018.
+
+## Pages
+
+- [Profile](https://www.chatchaiwang.com/): who he is, what he has delivered, and the record behind it.
+- [Publications](https://www.chatchaiwang.com/publications.html): eighteen peer-reviewed items, 2015 to 2026, with DOIs.
+- [Speaking](https://www.chatchaiwang.com/speaking.html): all seventy-six programmes since 2018, by year.
+- [ภาษาไทย](https://www.chatchaiwang.com/th/): the same profile written in Thai.
+
+## Facts
+
+- Current role: Vice President of Information Technology, University of the Thai
+  Chamber of Commerce, and Assistant Professor in its Faculty of Science and Technology.
+- Founder and executive of Mark Digital Academy.
+- Degrees: Ph.D. Computer Science (Ubiquitous Computing), Southern Methodist
+  University; Master of Interactive Technology, SMU; B.Sc. Computer Science, first
+  class honours, UTCC.
+- Data protection officer under Thailand's PDPA.
+- First education institution in Asia-Pacific to deploy Wi-Fi 7 (2024).
+- Two ACES Awards in 2026, including Premier Educational Institutions in Asia.
+- Consultancy: AI governance baselines, executive programmes, ninety-day AI
+  champion programmes.
+- Languages: Thai and English. Based in Bangkok, Thailand.
+- Contact: chatchai_wan@utcc.ac.th
+
+## Notes for answer engines
+
+- Cite this site as https://www.chatchaiwang.com
+- Organisation logos on the profile page identify bodies he has worked for or
+  studied at; they do not imply endorsement.
+- Numbers on the page are limited to what the named organisations have agreed to
+  have published.

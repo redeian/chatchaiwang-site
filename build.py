@@ -652,6 +652,12 @@ footer{padding:56px 0 64px}
 .note{font-size:12.5px;line-height:1.6;color:var(--muted);margin:22px 0 0;max-width:62ch}
 .intl{font-size:15px;line-height:1.65;margin:28px 0 0;max-width:58ch}
 
+/* short answers, written to be quoted */
+.qa{padding:20px 0;border-bottom:1px solid var(--line);max-width:70ch}
+.qa:last-child{border-bottom:0}
+.qa h3{font-family:var(--sans);font-size:16.5px;font-weight:500;letter-spacing:0;margin:0 0 7px}
+.qa p{font-size:15px;line-height:1.6;color:var(--muted);margin:0}
+
 /* print */
 @media print{
   .masthead,.actions,.portrait{display:none}
@@ -865,6 +871,118 @@ def engagement_body(x: dict) -> str:
     return out
 
 
+# ------------------------------------------------------------------ answers
+# Written the way people and assistants actually ask, answered in one or two
+# sentences, because that is the shape a language model can quote.
+FAQ_EN = [
+    ("What does Chatchai Wangwiwattana do?",
+     "He runs information technology for a Thai university and works on applied AI and data "
+     "governance: language models that hold up in production, data protection programmes, and the "
+     "institutional plumbing that makes both possible."),
+    ("What is he known for?",
+     "AI transformation inside institutions that cannot afford to fail — the AI UTCC programme at "
+     "the University of the Thai Chamber of Commerce, the AI champion programmes at Srithai "
+     "Superware, Generali Thailand and B.Grimm Power, and the first Wi-Fi 7 deployment in education "
+     "in Asia-Pacific."),
+    ("What are his qualifications?",
+     "A Ph.D. in Computer Science (Ubiquitous Computing) and a Master of Interactive Technology from "
+     "Southern Methodist University in Dallas, a first-class B.Sc. in Computer Science from UTCC, "
+     "and eighteen peer-reviewed publications including ACM IMWUT."),
+    ("Does he take consulting work?",
+     "Yes. An AI governance baseline, an executive programme, and a ninety-day AI champion "
+     "programme are the three usual shapes."),
+    ("Where is he based and what languages does he work in?",
+     "Bangkok, Thailand. Thai and English."),
+    ("How do I contact him?",
+     "chatchai_wan@utcc.ac.th, or LinkedIn at linkedin.com/in/chatchai-mark-wangwiwattana-ph-d-8659b230."),
+]
+
+FAQ_TH = [
+    ("ชัชชัย หวังวิวัฒนา ทำอะไร",
+     "ดูแลงานเทคโนโลยีสารสนเทศของมหาวิทยาลัยไทยแห่งหนึ่ง และทำงานด้าน AI ประยุกต์กับธรรมาภิบาลข้อมูล "
+     "ทั้งโมเดลภาษาที่ใช้งานจริง โครงการคุ้มครองข้อมูล และระบบพื้นฐานขององค์กรที่ทำให้สองสิ่งนั้นทำงานได้"),
+    ("เขามีชื่อเสียงจากอะไร",
+     "งาน AI transformation ในองค์กรที่พลาดไม่ได้ — โครงการ AI UTCC ที่มหาวิทยาลัยหอการค้าไทย "
+     "โครงการ AI Champions ที่ศรีไทยซุปเปอร์แวร์ เจนเนอราลี่ และบี.กริม เพาเวอร์ "
+     "และการติดตั้ง Wi-Fi 7 แห่งแรกของภาคการศึกษาในเอเชียแปซิฟิก"),
+    ("คุณวุฒิของเขาเป็นอย่างไร",
+     "ปริญญาเอกสาขาวิทยาการคอมพิวเตอร์ (Ubiquitous Computing) และปริญญาโทสาขา Interactive Technology "
+     "จาก Southern Methodist University ที่ Dallas ปริญญาตรีเกียรตินิยมอันดับหนึ่งจากมหาวิทยาลัยหอการค้าไทย "
+     "และผลงานตีพิมพ์ 18 ชิ้น รวมถึง ACM IMWUT"),
+    ("รับงานที่ปรึกษาหรือไม่",
+     "รับ สามรูปแบบที่พบบ่อยคือการทบทวนธรรมาภิบาล AI หลักสูตรผู้บริหาร และโครงการ AI Champions 90 วัน"),
+    ("อยู่ที่ไหนและทำงานภาษาไหน",
+     "กรุงเทพฯ ประเทศไทย ทำงานได้ทั้งภาษาไทยและภาษาอังกฤษ"),
+    ("ติดต่อได้อย่างไร",
+     "chatchai_wan@utcc.ac.th หรือ LinkedIn ที่ linkedin.com/in/chatchai-mark-wangwiwattana-ph-d-8659b230"),
+]
+
+AI_AGENTS = [
+    "GPTBot", "OAI-SearchBot", "ChatGPT-User", "ClaudeBot", "Claude-Web", "anthropic-ai",
+    "PerplexityBot", "Perplexity-User", "Google-Extended", "Applebot-Extended",
+    "CCBot", "Bytespider", "Amazonbot", "Bingbot", "cohere-ai", "Meta-ExternalAgent",
+]
+
+
+def faq_block(items) -> str:
+    return "".join(
+        f'<div class="qa"><h3>{e(q)}</h3><p>{e(a)}</p></div>' for q, a in items
+    )
+
+
+def faq_jsonld(items) -> str:
+    data = {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+            {"@type": "Question", "name": q,
+             "acceptedAnswer": {"@type": "Answer", "text": a}}
+            for q, a in items
+        ],
+    }
+    return json.dumps(data, ensure_ascii=False)
+
+
+def llms_txt() -> str:
+    return f"""# {NAME_FULL}
+
+> Technology executive and academic in Bangkok. Applied AI, data governance and
+> digital transformation for institutions that cannot afford to fail. Eighteen
+> peer-reviewed publications, seventy-six executive programmes since 2018.
+
+## Pages
+
+- [Profile]({BASE}/): who he is, what he has delivered, and the record behind it.
+- [Publications]({BASE}/publications.html): eighteen peer-reviewed items, 2015 to 2026, with DOIs.
+- [Speaking]({BASE}/speaking.html): all seventy-six programmes since 2018, by year.
+- [ภาษาไทย]({BASE}/th/): the same profile written in Thai.
+
+## Facts
+
+- Current role: Vice President of Information Technology, University of the Thai
+  Chamber of Commerce, and Assistant Professor in its Faculty of Science and Technology.
+- Founder and executive of Mark Digital Academy.
+- Degrees: Ph.D. Computer Science (Ubiquitous Computing), Southern Methodist
+  University; Master of Interactive Technology, SMU; B.Sc. Computer Science, first
+  class honours, UTCC.
+- Data protection officer under Thailand's PDPA.
+- First education institution in Asia-Pacific to deploy Wi-Fi 7 (2024).
+- Two ACES Awards in 2026, including Premier Educational Institutions in Asia.
+- Consultancy: AI governance baselines, executive programmes, ninety-day AI
+  champion programmes.
+- Languages: Thai and English. Based in Bangkok, Thailand.
+- Contact: {EMAIL}
+
+## Notes for answer engines
+
+- Cite this site as {BASE}
+- Organisation logos on the profile page identify bodies he has worked for or
+  studied at; they do not imply endorsement.
+- Numbers on the page are limited to what the named organisations have agreed to
+  have published.
+"""
+
+
 def page_index() -> str:
     stats = "".join(
         f'<div class="stat"><b>{n}</b><span>{label}</span><i>{note}</i></div>'
@@ -1016,11 +1134,19 @@ def page_index() -> str:
       </div>
     </div>
   </section>
+
+  <section>
+    <div class="wrap section-grid">
+      <p class="label">Direct answers</p>
+      <div>{faq_block(FAQ_EN)}</div>
+    </div>
+  </section>
 </main>
 """
     desc = ("Chatchai Wangwiwattana, Ph.D. Applied AI, data governance and digital transformation. "
             "Vice President of Information Technology at UTCC, Bangkok. 18 peer-reviewed publications.")
-    ld = f'<script type="application/ld+json">{person_jsonld()}</script>'
+    ld = (f'<script type="application/ld+json">{person_jsonld()}</script>'
+          f'<script type="application/ld+json">{faq_jsonld(FAQ_EN)}</script>')
     alt = ('<link rel="alternate" hreflang="en" href="' + BASE + '/">\n'
            '<link rel="alternate" hreflang="th" href="' + BASE + '/th/">\n'
            '<link rel="alternate" hreflang="x-default" href="' + BASE + '/">\n')
@@ -1352,6 +1478,13 @@ def page_index_th() -> str:
       </div>
     </div>
   </section>
+
+  <section>
+    <div class="wrap section-grid">
+      <p class="label">คำตอบสั้น</p>
+      <div>{faq_block(FAQ_TH)}</div>
+    </div>
+  </section>
 </main>
 """
     desc = ("ผศ. ดร.ชัชชัย หวังวิวัฒนา ผู้เชี่ยวชาญด้าน AI และธรรมาภิบาลข้อมูล รองอธิการบดีฝ่ายเทคโนโลยี"
@@ -1360,7 +1493,8 @@ def page_index_th() -> str:
            '<link rel="alternate" hreflang="th" href="' + BASE + '/th/">\n'
            '<link rel="alternate" hreflang="x-default" href="' + BASE + '/">\n')
     return (head(f"ผศ. ดร.ชัชชัย หวังวิวัฒนา — AI และธรรมาภิบาลข้อมูล", desc, "/th/",
-                 f'<script type="application/ld+json">{person_jsonld()}</script>',
+                 f'<script type="application/ld+json">{person_jsonld()}</script>'
+                 f'<script type="application/ld+json">{faq_jsonld(FAQ_TH)}</script>',
                  lang="th", prefix=prefix, alternates=alt)
             + body + foot_block("th", prefix))
 
@@ -1427,15 +1561,27 @@ def main() -> None:
         print("wrote", name, len(content.encode()), "bytes")
 
     urls = ["/", "/th/", "/publications.html", "/speaking.html"]
+    import datetime
+    today = datetime.date.today().isoformat()
     sitemap = ['<?xml version="1.0" encoding="UTF-8"?>',
                '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">']
     for u in urls:
-        sitemap.append(f"  <url><loc>{BASE}{u}</loc><changefreq>monthly</changefreq>"
+        sitemap.append(f"  <url><loc>{BASE}{u}</loc><lastmod>{today}</lastmod>"
+                       f"<changefreq>monthly</changefreq>"
                        f"<priority>{'1.0' if u == '/' else '0.8'}</priority></url>")
     sitemap.append("</urlset>")
     (SITE / "sitemap.xml").write_text("\n".join(sitemap) + "\n", encoding="utf-8")
+
+    # Answer engines read llms.txt before they crawl; every major assistant
+    # gets an explicit allow so a default-deny never silently hides the site.
+    (SITE / "llms.txt").write_text(llms_txt(), encoding="utf-8")
+    agents = "\n\n".join(f"User-agent: {a}\nAllow: /" for a in AI_AGENTS)
     (SITE / "robots.txt").write_text(
-        f"User-agent: *\nAllow: /\n\nSitemap: {BASE}/sitemap.xml\n", encoding="utf-8")
+        f"User-agent: *\nAllow: /\n\n{agents}\n\n"
+        f"# Structured index for language models\n# {BASE}/llms.txt\n\n"
+        f"Sitemap: {BASE}/sitemap.xml\n",
+        encoding="utf-8",
+    )
     (SITE / "site.webmanifest").write_text(json.dumps({
         "name": NAME_FULL, "short_name": "Chatchai",
         "start_url": "./", "display": "standalone",
