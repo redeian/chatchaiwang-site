@@ -23,6 +23,10 @@ PAPER = (245, 242, 234, 255)
 WANT = ["senate", "etda", "pdpc", "dpim", "true", "srithai", "tcc",
         "depa", "stanford", "oceg", "utcc", "smu", "smu-seal"]
 
+# Some sources ship a monochrome seal. Tint it to the organisation's own site
+# blue (#354ca1, taken from smu.edu's stylesheet) rather than leaving it grey.
+TINT = {"smu-seal": (53, 76, 161)}
+
 
 def trim(im: Image.Image) -> Image.Image:
     """Crop to the ink, then add a small transparent margin so no mark sits flush
@@ -97,6 +101,14 @@ def main():
             continue
         k = HEIGHT / im.height
         out = im.resize((max(1, round(im.width * k)), HEIGHT), Image.LANCZOS)
+        if key in TINT:
+            r, g, b = TINT[key]
+            px = out.load()
+            for y in range(out.height):
+                for x in range(out.width):
+                    _, _, _, a = px[x, y]
+                    if a:
+                        px[x, y] = (r, g, b, a)
         out.save(OUT / f"{key}.png", optimize=True)
         made.append((key, out.size, (OUT / f"{key}.png").stat().st_size))
     for key, size, nbytes in made:
