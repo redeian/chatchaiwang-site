@@ -1,0 +1,6 @@
+.qa-*
+.crop-*
+.shot-*
+.og.html
+__pycache__/
+.DS_Store
