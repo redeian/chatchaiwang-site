@@ -1,0 +1,20 @@
+{
+  "checks": [
+    {
+      "name": "build-check",
+      "cmd": "env -u PYTHONPATH python3 build.py >/dev/null && env -u PYTHONPATH python3 check.py && git diff --exit-code --quiet -- '*.html' && git checkout -- assets/cv.pdf",
+      "timeout": 600
+    }
+  ],
+  "protected_paths": [
+    "check.py",
+    "build_cv.py",
+    "release.sh",
+    "factory.json",
+    ".github/",
+    "CNAME",
+    ".nojekyll"
+  ],
+  "min_passed": 0,
+  "notes": "No pytest here, so the test counter is always zero and min_passed stays 0. The weight is carried by check.py (content invariants) plus a holdout per issue that asserts on the built HTML. build.py regenerates assets/cv.pdf with a new timestamp, so the command restores it to keep the tree clean for the factory's dirty check."
+}
