@@ -106,9 +106,18 @@ def main():
             px = out.load()
             for y in range(out.height):
                 for x in range(out.width):
-                    _, _, _, a = px[x, y]
-                    if a:
-                        px[x, y] = (r, g, b, a)
+                    pr, pg, pb, a = px[x, y]
+                    if not a:
+                        continue
+                    # keep the engraving: dark ink becomes the brand colour,
+                    # light areas stay paper-white, antialiasing survives
+                    lum = (pr + pg + pb) / 765.0
+                    px[x, y] = (
+                        round(r * (1 - lum) + 255 * lum),
+                        round(g * (1 - lum) + 255 * lum),
+                        round(b * (1 - lum) + 255 * lum),
+                        a,
+                    )
         out.save(OUT / f"{key}.png", optimize=True)
         made.append((key, out.size, (OUT / f"{key}.png").stat().st_size))
     for key, size, nbytes in made:
