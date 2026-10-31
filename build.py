@@ -22,6 +22,26 @@ YOUTUBE = "https://www.youtube.com/@markdigitalacademy"
 ACADEMY = "https://markdigitalacademy.com/"
 ORCID = "https://orcid.org/0000-0002-2922-6498"
 ORCID_ID = "0000-0002-2922-6498"
+# The identity hub. markdigitalacademy.com/about declares the single Person
+# entity; this site declares the same entity from the other end, which is what
+# lets a search engine or a model merge the two into one person.
+HUB = "https://markdigitalacademy.com/about"
+ORG_ID = "https://markdigitalacademy.com/#organization"
+GITHUB = "https://github.com/redeian"
+KAGGLE = "https://www.kaggle.com/redeian"
+XTW = "https://x.com/redeian"
+SCHOLAR = "https://scholar.google.com/citations?user=jJaSRS4AAAAJ&hl=en"
+FACEBOOK = "https://web.facebook.com/prodgamers"
+ACM = "https://dl.acm.org/profile/99658754368"
+
+# Every name this person answers to, in the spellings people actually type.
+ALIASES = ["หมาก ดิจิทัล", "Mark Digital", "อ.หมาก", "ชัชชัย หวังวิวัฒนา",
+           "redeian", "Chatchai Mark Wangwiwattana"]
+
+# Must stay in step with markdigitalacademy.com/about; drift here is what breaks
+# entity merging, so this list is the single copy the whole build reads.
+SAME_AS = [HUB, YOUTUBE, GITHUB, "https://www.linkedin.com/in/chatchai-mark-wangwiwattana-ph-d-8659b230",
+           KAGGLE, ORCID, SCHOLAR, FACEBOOK, XTW, ACM, ACADEMY]
 # Set once the exact profile URL is known. ResearchGate answers every guess with
 # 403, and a wrong profile URL is worse than none, so this stays empty until
 # Mark pastes his own.
@@ -764,9 +784,11 @@ def foot_block(lang: str = "en", prefix: str = "") -> str:
             "สามทางที่เริ่มได้ ทบทวนธรรมาภิบาล AI ให้องค์กรของคุณ หลักสูตรผู้บริหารสำหรับทีมผู้นำ "
             "และโครงการ AI Champions 90 วันที่ทำให้คนของคุณเดินระบบเองได้")
         links = [(f"mailto:{EMAIL}", EMAIL), (LINKEDIN, "LinkedIn"),
-                 (ACADEMY, "Mark Digital Academy"), (ORCID, "ORCID")]
+                 (SCHOLAR, "Google Scholar"), (ORCID, "ORCID"), (GITHUB, "GitHub"),
+                 (KAGGLE, "Kaggle"), (XTW, "X")]
         if RESEARCHGATE:
             links.append((RESEARCHGATE, "ResearchGate"))
+        links.append((HUB, "เกี่ยวกับหมาก ดิจิทัล"))
         links.append((f"{prefix}assets/cv.pdf", "CV, PDF"))
         fine_left, fine_right = f"&copy; 2026 {NAME} กรุงเทพฯ ประเทศไทย", "หน้าเว็บ static ไม่มีตัวติดตาม ไม่มีคุกกี้"
     else:
@@ -775,9 +797,11 @@ def foot_block(lang: str = "en", prefix: str = "") -> str:
             "for the leadership team. A ninety-day AI champion programme that leaves your own people "
             "able to run it.")
         links = [(f"mailto:{EMAIL}", EMAIL), (LINKEDIN, "LinkedIn"),
-                 (ACADEMY, "Mark Digital Academy"), (ORCID, "ORCID")]
+                 (SCHOLAR, "Google Scholar"), (ORCID, "ORCID"), (GITHUB, "GitHub"),
+                 (KAGGLE, "Kaggle"), (XTW, "X")]
         if RESEARCHGATE:
             links.append((RESEARCHGATE, "ResearchGate"))
+        links.append((HUB, "About หมาก ดิจิทัล"))
         links.append((f"{prefix}assets/cv.pdf", "CV, PDF"))
         fine_left, fine_right = f"&copy; 2026 {NAME}. Bangkok, Thailand.", "Static page. No trackers, no cookies."
     rendered = "".join(f'<a href="{h}"{" rel=\"me noopener\"" if h.startswith("http") else ""}>{label}</a>'
@@ -828,9 +852,10 @@ def person_jsonld() -> str:
             },
             {
                 "@type": "Organization",
+                "@id": ORG_ID,
                 "name": "Mark Digital Academy",
                 "url": ACADEMY,
-                "sameAs": [YOUTUBE],
+                "sameAs": [YOUTUBE, HUB],
             },
         ],
         "alumniOf": [
@@ -843,12 +868,13 @@ def person_jsonld() -> str:
             "Human-computer interaction", "Higher education technology",
         ],
         "knowsLanguage": ["th", "en"],
+        "alternateName": ALIASES,
         "identifier": {
             "@type": "PropertyValue",
             "propertyID": "ORCID",
             "value": ORCID_ID,
         },
-        "sameAs": [LINKEDIN, YOUTUBE, ORCID, ACADEMY] + ([RESEARCHGATE] if RESEARCHGATE else []),
+        "sameAs": [BASE + "/"] + SAME_AS + ([RESEARCHGATE] if RESEARCHGATE else []),
     }
     return json.dumps(data, ensure_ascii=False, indent=None)
 
@@ -991,6 +1017,8 @@ def llms_txt() -> str:
 - Consultancy: AI governance baselines, executive programmes, ninety-day AI
   champion programmes.
 - Languages: Thai and English. Based in Bangkok, Thailand.
+- Also known as: หมาก ดิจิทัล, Mark Digital, อ.หมาก, redeian — the same person.
+- Identity hub: {HUB}
 - ORCID: {ORCID_ID}
 {rg}- Contact: {EMAIL}
 
@@ -1084,7 +1112,11 @@ def page_index() -> str:
         research.</p>
         <p class="now">Vice President of Information Technology and Assistant Professor at the
         University of the Thai Chamber of Commerce, and founder of
-        <a href="{ACADEMY}" rel="me noopener">Mark Digital Academy</a>.</p>
+        <a href="{ACADEMY}" rel="me noopener">Mark Digital Academy</a>. In Thailand I am known
+        as <strong lang="th">หมาก ดิจิทัล</strong> (Mark Digital) and my students call me
+        <strong lang="th">อ.หมาก</strong> — the same person as
+        <strong>Chatchai Wangwiwattana</strong>. <strong>redeian</strong> is my handle on GitHub,
+        Kaggle and X.</p>
         <div class="actions">
           <a class="btn" href="mailto:{EMAIL}">Start a conversation</a>
           <a class="btn ghost" href="assets/cv.pdf">Download CV</a>
@@ -1435,7 +1467,10 @@ def page_index_th() -> str:
         <p class="lede">ผมออกแบบและดูแลระบบที่ทำให้องค์กรใช้ AI ได้โดยไม่เสียการควบคุมข้อมูลของตัวเอง
         สิบแปดปีในงานวิศวกรรมซอฟต์แวร์ การนำด้านไอที และงานวิจัยประยุกต์</p>
         <p class="now">รองอธิการบดีฝ่ายเทคโนโลยีสารสนเทศ และอาจารย์ประจำมหาวิทยาลัยหอการค้าไทย
-        ผู้ก่อตั้ง <a href="{ACADEMY}" rel="me noopener">Mark Digital Academy</a></p>
+        ผู้ก่อตั้ง <a href="{ACADEMY}" rel="me noopener">Mark Digital Academy</a>
+        ในประเทศไทยผมเป็นที่รู้จักในชื่อ <strong>หมาก ดิจิทัล</strong> (Mark Digital) และนักเรียนเรียกผมว่า
+        <strong>อ.หมาก</strong> — เป็นคนเดียวกับ <strong>ชัชชัย หวังวิวัฒนา</strong>
+        และ <strong>redeian</strong> คือชื่อผู้ใช้ของผมบน GitHub, Kaggle และ X</p>
         <div class="actions">
           <a class="btn" href="mailto:{EMAIL}">พูดคุยกัน</a>
           <a class="btn ghost" href="{prefix}assets/cv.pdf">ดาวน์โหลด CV</a>
