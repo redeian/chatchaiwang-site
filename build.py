@@ -391,16 +391,21 @@ ENGAGEMENTS = [
     dict(
         org="B.Grimm Power",
         meta="AI champion programme &middot; 2024 to present",
-        body="Training, capacity building and pitching for about thirty AI champions.",
+        body=(
+            "Training, capacity building and pitching for about thirty AI champions. Three to "
+            "five of their projects reach production each year."
+        ),
     ),
     dict(
         org="University of the Thai Chamber of Commerce",
         meta="Vice President of Information Technology &middot; 2025 to present",
         body=(
-            "Runs a fifty-person IT organisation across infrastructure, cloud, security, data and "
-            "IT governance, PDPA as data protection officer, the LMS and vendor estate, and the "
-            "university's computers and iPads. Founded the AI centre and led the AI transformation "
-            "that won the ACES Awards 2026."
+            "Runs a fifty-person IT organisation and 22,000 devices, 2,000 computers and 20,000 "
+            "iPads. Led the paperless transformation, the API-first policy and the data governance "
+            "framework, and built eight AI and software systems in house for about 3 million baht "
+            "a year against roughly 15 million quoted from outside. Token-based AI infrastructure "
+            "rather than a data centre, and the first university in ASEAN on WiFi 7. Three ACES "
+            "Awards, including Premier Education in ASEAN."
         ),
     ),
 ]
