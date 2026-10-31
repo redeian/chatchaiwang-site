@@ -687,11 +687,9 @@ footer{padding:56px 0 64px}
 .note{font-size:12.5px;line-height:1.6;color:var(--muted);margin:22px 0 0;max-width:62ch}
 .intl{font-size:15px;line-height:1.65;margin:28px 0 0;max-width:58ch}
 
-/* short answers, written to be quoted */
-.qa{padding:20px 0;border-bottom:1px solid var(--line);max-width:70ch}
-.qa:last-child{border-bottom:0}
-.qa h3{font-family:var(--sans);font-size:16.5px;font-weight:500;letter-spacing:0;margin:0 0 7px}
-.qa p{font-size:15px;line-height:1.6;color:var(--muted);margin:0}
+/* Thai sets wider than Latin and offers no space to break on, so the same clamp
+   split the name mid-surname and left "วัฒนา" alone on a second line. */
+html[lang="th"] .hero h1{font-size:clamp(31px,4.2vw,52px);line-height:1.2;text-wrap:balance}
 
 /* print */
 @media print{
@@ -924,76 +922,11 @@ def engagement_body(x: dict) -> str:
     return out
 
 
-# ------------------------------------------------------------------ answers
-# Written the way people and assistants actually ask, answered in one or two
-# sentences, because that is the shape a language model can quote.
-FAQ_EN = [
-    ("What does Chatchai Wangwiwattana do?",
-     "He runs information technology for a Thai university and works on applied AI and data "
-     "governance: language models that hold up in production, data protection programmes, and the "
-     "institutional plumbing that makes both possible."),
-    ("What is he known for?",
-     "AI transformation inside institutions that cannot afford to fail — the AI UTCC programme at "
-     "the University of the Thai Chamber of Commerce, the AI champion programmes at Srithai "
-     "Superware, Generali Thailand and B.Grimm Power, and the first Wi-Fi 7 deployment in education "
-     "in Asia-Pacific."),
-    ("What are his qualifications?",
-     "A Ph.D. in Computer Science (Ubiquitous Computing) and a Master of Interactive Technology from "
-     "Southern Methodist University in Dallas, a first-class B.Sc. in Computer Science from UTCC, "
-     "and eighteen peer-reviewed publications including ACM IMWUT."),
-    ("Does he take consulting work?",
-     "Yes. An AI governance baseline, an executive programme, and a ninety-day AI champion "
-     "programme are the three usual shapes."),
-    ("Where is he based and what languages does he work in?",
-     "Bangkok, Thailand. Thai and English."),
-    ("How do I contact him?",
-     "chatchai_wan@utcc.ac.th, or LinkedIn at linkedin.com/in/chatchai-mark-wangwiwattana-ph-d-8659b230."),
-]
-
-FAQ_TH = [
-    ("ชัชชัย หวังวิวัฒนา ทำอะไร",
-     "ดูแลงานเทคโนโลยีสารสนเทศของมหาวิทยาลัยไทยแห่งหนึ่ง และทำงานด้าน AI ประยุกต์กับธรรมาภิบาลข้อมูล "
-     "ทั้งโมเดลภาษาที่ใช้งานจริง โครงการคุ้มครองข้อมูล และระบบพื้นฐานขององค์กรที่ทำให้สองสิ่งนั้นทำงานได้"),
-    ("เขามีชื่อเสียงจากอะไร",
-     "งาน AI transformation ในองค์กรที่พลาดไม่ได้ — โครงการ AI UTCC ที่มหาวิทยาลัยหอการค้าไทย "
-     "โครงการ AI Champions ที่ศรีไทยซุปเปอร์แวร์ เจนเนอราลี่ และบี.กริม เพาเวอร์ "
-     "และการติดตั้ง Wi-Fi 7 แห่งแรกของภาคการศึกษาในเอเชียแปซิฟิก"),
-    ("คุณวุฒิของเขาเป็นอย่างไร",
-     "ปริญญาเอกสาขาวิทยาการคอมพิวเตอร์ (Ubiquitous Computing) และปริญญาโทสาขา Interactive Technology "
-     "จาก Southern Methodist University ที่ Dallas ปริญญาตรีเกียรตินิยมอันดับหนึ่งจากมหาวิทยาลัยหอการค้าไทย "
-     "และผลงานตีพิมพ์ 18 ชิ้น รวมถึง ACM IMWUT"),
-    ("รับงานที่ปรึกษาหรือไม่",
-     "รับ สามรูปแบบที่พบบ่อยคือการทบทวนธรรมาภิบาล AI หลักสูตรผู้บริหาร และโครงการ AI Champions 90 วัน"),
-    ("อยู่ที่ไหนและทำงานภาษาไหน",
-     "กรุงเทพฯ ประเทศไทย ทำงานได้ทั้งภาษาไทยและภาษาอังกฤษ"),
-    ("ติดต่อได้อย่างไร",
-     "chatchai_wan@utcc.ac.th หรือ LinkedIn ที่ linkedin.com/in/chatchai-mark-wangwiwattana-ph-d-8659b230"),
-]
-
 AI_AGENTS = [
     "GPTBot", "OAI-SearchBot", "ChatGPT-User", "ClaudeBot", "Claude-Web", "anthropic-ai",
     "PerplexityBot", "Perplexity-User", "Google-Extended", "Applebot-Extended",
     "CCBot", "Bytespider", "Amazonbot", "Bingbot", "cohere-ai", "Meta-ExternalAgent",
 ]
-
-
-def faq_block(items) -> str:
-    return "".join(
-        f'<div class="qa"><h3>{e(q)}</h3><p>{e(a)}</p></div>' for q, a in items
-    )
-
-
-def faq_jsonld(items) -> str:
-    data = {
-        "@context": "https://schema.org",
-        "@type": "FAQPage",
-        "mainEntity": [
-            {"@type": "Question", "name": q,
-             "acceptedAnswer": {"@type": "Answer", "text": a}}
-            for q, a in items
-        ],
-    }
-    return json.dumps(data, ensure_ascii=False)
 
 
 def llms_txt() -> str:
@@ -1225,19 +1158,11 @@ def page_index() -> str:
       </div>
     </div>
   </section>
-
-  <section>
-    <div class="wrap section-grid">
-      <p class="label">Direct answers</p>
-      <div>{faq_block(FAQ_EN)}</div>
-    </div>
-  </section>
 </main>
 """
     desc = ("Chatchai Wangwiwattana, Ph.D. Applied AI, data governance and digital transformation. "
             "Vice President of Information Technology at UTCC, Bangkok. 18 peer-reviewed publications.")
-    ld = (f'<script type="application/ld+json">{person_jsonld()}</script>'
-          f'<script type="application/ld+json">{faq_jsonld(FAQ_EN)}</script>')
+    ld = f'<script type="application/ld+json">{person_jsonld()}</script>'
     alt = ('<link rel="alternate" hreflang="en" href="' + BASE + '/">\n'
            '<link rel="alternate" hreflang="th" href="' + BASE + '/th/">\n'
            '<link rel="alternate" hreflang="x-default" href="' + BASE + '/">\n')
@@ -1569,13 +1494,6 @@ def page_index_th() -> str:
       </div>
     </div>
   </section>
-
-  <section>
-    <div class="wrap section-grid">
-      <p class="label">คำตอบสั้น</p>
-      <div>{faq_block(FAQ_TH)}</div>
-    </div>
-  </section>
 </main>
 """
     desc = ("ผศ. ดร.ชัชชัย หวังวิวัฒนา ผู้เชี่ยวชาญด้าน AI และธรรมาภิบาลข้อมูล รองอธิการบดีฝ่ายเทคโนโลยี"
@@ -1584,8 +1502,7 @@ def page_index_th() -> str:
            '<link rel="alternate" hreflang="th" href="' + BASE + '/th/">\n'
            '<link rel="alternate" hreflang="x-default" href="' + BASE + '/">\n')
     return (head(f"ผศ. ดร.ชัชชัย หวังวิวัฒนา — AI และธรรมาภิบาลข้อมูล", desc, "/th/",
-                 f'<script type="application/ld+json">{person_jsonld()}</script>'
-                 f'<script type="application/ld+json">{faq_jsonld(FAQ_TH)}</script>',
+                 f'<script type="application/ld+json">{person_jsonld()}</script>',
                  lang="th", prefix=prefix, alternates=alt)
             + body + foot_block("th", prefix))
 

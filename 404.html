@@ -184,11 +184,9 @@ footer{padding:56px 0 64px}
 .note{font-size:12.5px;line-height:1.6;color:var(--muted);margin:22px 0 0;max-width:62ch}
 .intl{font-size:15px;line-height:1.65;margin:28px 0 0;max-width:58ch}
 
-/* short answers, written to be quoted */
-.qa{padding:20px 0;border-bottom:1px solid var(--line);max-width:70ch}
-.qa:last-child{border-bottom:0}
-.qa h3{font-family:var(--sans);font-size:16.5px;font-weight:500;letter-spacing:0;margin:0 0 7px}
-.qa p{font-size:15px;line-height:1.6;color:var(--muted);margin:0}
+/* Thai sets wider than Latin and offers no space to break on, so the same clamp
+   split the name mid-surname and left "วัฒนา" alone on a second line. */
+html[lang="th"] .hero h1{font-size:clamp(31px,4.2vw,52px);line-height:1.2;text-wrap:balance}
 
 /* print */
 @media print{

@@ -92,12 +92,6 @@ for name in HOME:
         if not orgs:
             fail(f"{name} worksFor does not carry the hub @id")
 
-    faq = next((b for b in parsed if b.get("@type") == "FAQPage"), None)
-    if not faq:
-        fail(f"{name} has no FAQPage block")
-    elif len(faq.get("mainEntity", [])) < 4:
-        fail(f"{name} FAQPage has only {len(faq.get('mainEntity', []))} answers")
-
 # 4. the two homepages announce each other ---------------------------------
 for name, other in (("index.html", "th"), ("th/index.html", "en")):
     if f'hreflang="{other}"' not in pages[name]:

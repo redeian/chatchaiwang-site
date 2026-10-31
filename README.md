@@ -64,7 +64,6 @@ Edit these, never the HTML.
 | `JOURNALS`, `CONFERENCES`, `THAI`, `PREPRINTS` | the 18 publications and the `.bib` |
 | `SPEAKING` | 76 programmes, dict keyed by year |
 | `EDUCATION`, `CERTIFICATIONS` | the bottom two columns |
-| `FAQ_EN` / `FAQ_TH` | the six quotable answers, mirrored into `FAQPage` schema |
 | `ALIASES`, `SAME_AS` | the identity graph; must match the hub at `markdigitalacademy.com/about` |
 | `LOGO_BANDS` / `TH_BANDS` | the four logo bands |
 
