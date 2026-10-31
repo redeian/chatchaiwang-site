@@ -108,8 +108,8 @@ EXPERIENCE = [
     (
         "Industry and advisory",
         [
-            ("AI Transformation Consultant, cross-functional initiative", "Generali Life Assurance (Thailand)", "2026 to present"),
-            ("AI Transformation Consultant, AI champion projects, training and design thinking", "B.Grimm Power", "2024 to present"),
+            ("AI Transformation Consultant, cross-functional initiative", "Generali Life Assurance (Thailand)", "2026"),
+            ("AI Transformation Consultant, AI champion projects, training and design thinking", "B.Grimm Power", "2024 to 2026"),
             ("AI Transformation Consultant", "Srithai Superware", "2025 to present"),
             ("Founder and Chief Technology Officer", "Demon Wagon Game Studio, with earlier software and CIO roles at Profitarrowmarketing, Southern Methodist University and CPF IT Center", "2008 to 2018"),
             ("Consultant, Master Plan for Personal Data Protection", "Office of the Personal Data Protection Committee", "2021"),
@@ -380,7 +380,7 @@ CERTIFICATIONS = [
 ENGAGEMENTS = [
     dict(
         org="Generali Life Assurance Thailand",
-        meta="AI transformation consultant, cross-functional initiative &middot; 2026 to present",
+        meta="AI transformation consultant, cross-functional initiative &middot; 2026, completed",
         body=(
             "Design thinking with eight executives, then four sessions with the company's AI "
             "champions from idea to working product, closing in a pitch to sponsors. Several "
@@ -417,7 +417,7 @@ ENGAGEMENTS = [
     ),
     dict(
         org="B.Grimm Power",
-        meta="AI champion programme &middot; 2024 to present",
+        meta="AI champion programme &middot; 2024 to 2026",
         body=(
             "Training, capacity building and pitching for about thirty AI champions. Three to "
             "five of their projects reach production each year."
