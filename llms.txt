@@ -25,6 +25,7 @@
 - Consultancy: AI governance baselines, executive programmes, ninety-day AI
   champion programmes.
 - Languages: Thai and English. Based in Bangkok, Thailand.
+- ORCID: 0000-0002-2922-6498
 - Contact: chatchai_wan@utcc.ac.th
 
 ## Notes for answer engines

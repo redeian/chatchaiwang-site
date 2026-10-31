@@ -20,6 +20,12 @@ EMAIL = "chatchai_wan@utcc.ac.th"
 LINKEDIN = "https://linkedin.com/in/chatchai-mark-wangwiwattana-ph-d-8659b230"
 YOUTUBE = "https://www.youtube.com/@markdigitalacademy"
 ACADEMY = "https://markdigitalacademy.com/"
+ORCID = "https://orcid.org/0000-0002-2922-6498"
+ORCID_ID = "0000-0002-2922-6498"
+# Set once the exact profile URL is known. ResearchGate answers every guess with
+# 403, and a wrong profile URL is worse than none, so this stays empty until
+# Mark pastes his own.
+RESEARCHGATE = ""
 CHROME = "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"
 
 NAME = "Chatchai Wangwiwattana"
@@ -758,7 +764,10 @@ def foot_block(lang: str = "en", prefix: str = "") -> str:
             "สามทางที่เริ่มได้ ทบทวนธรรมาภิบาล AI ให้องค์กรของคุณ หลักสูตรผู้บริหารสำหรับทีมผู้นำ "
             "และโครงการ AI Champions 90 วันที่ทำให้คนของคุณเดินระบบเองได้")
         links = [(f"mailto:{EMAIL}", EMAIL), (LINKEDIN, "LinkedIn"),
-                 (ACADEMY, "Mark Digital Academy"), (f"{prefix}assets/cv.pdf", "CV, PDF")]
+                 (ACADEMY, "Mark Digital Academy"), (ORCID, "ORCID")]
+        if RESEARCHGATE:
+            links.append((RESEARCHGATE, "ResearchGate"))
+        links.append((f"{prefix}assets/cv.pdf", "CV, PDF"))
         fine_left, fine_right = f"&copy; 2026 {NAME} กรุงเทพฯ ประเทศไทย", "หน้าเว็บ static ไม่มีตัวติดตาม ไม่มีคุกกี้"
     else:
         heading, blurb = "Work with me", (
@@ -766,7 +775,10 @@ def foot_block(lang: str = "en", prefix: str = "") -> str:
             "for the leadership team. A ninety-day AI champion programme that leaves your own people "
             "able to run it.")
         links = [(f"mailto:{EMAIL}", EMAIL), (LINKEDIN, "LinkedIn"),
-                 (ACADEMY, "Mark Digital Academy"), (f"{prefix}assets/cv.pdf", "CV, PDF")]
+                 (ACADEMY, "Mark Digital Academy"), (ORCID, "ORCID")]
+        if RESEARCHGATE:
+            links.append((RESEARCHGATE, "ResearchGate"))
+        links.append((f"{prefix}assets/cv.pdf", "CV, PDF"))
         fine_left, fine_right = f"&copy; 2026 {NAME}. Bangkok, Thailand.", "Static page. No trackers, no cookies."
     rendered = "".join(f'<a href="{h}"{" rel=\"me noopener\"" if h.startswith("http") else ""}>{label}</a>'
                        for h, label in links)
@@ -831,7 +843,12 @@ def person_jsonld() -> str:
             "Human-computer interaction", "Higher education technology",
         ],
         "knowsLanguage": ["th", "en"],
-        "sameAs": [LINKEDIN, YOUTUBE],
+        "identifier": {
+            "@type": "PropertyValue",
+            "propertyID": "ORCID",
+            "value": ORCID_ID,
+        },
+        "sameAs": [LINKEDIN, YOUTUBE, ORCID, ACADEMY] + ([RESEARCHGATE] if RESEARCHGATE else []),
     }
     return json.dumps(data, ensure_ascii=False, indent=None)
 
@@ -946,6 +963,7 @@ def faq_jsonld(items) -> str:
 
 
 def llms_txt() -> str:
+    rg = f"- ResearchGate: {RESEARCHGATE}\n" if RESEARCHGATE else ""
     return f"""# {NAME_FULL}
 
 > Technology executive and academic in Bangkok. Applied AI, data governance and
@@ -973,7 +991,8 @@ def llms_txt() -> str:
 - Consultancy: AI governance baselines, executive programmes, ninety-day AI
   champion programmes.
 - Languages: Thai and English. Based in Bangkok, Thailand.
-- Contact: {EMAIL}
+- ORCID: {ORCID_ID}
+{rg}- Contact: {EMAIL}
 
 ## Notes for answer engines
 
@@ -983,6 +1002,40 @@ def llms_txt() -> str:
 - Numbers on the page are limited to what the named organisations have agreed to
   have published.
 """
+
+
+def bibtex() -> str:
+    """BibTeX for ORCID's import. ORCID resolves DOIs on import, which is what
+    turns a publication list here into works on the ORCID record."""
+    def authors(s: str) -> str:
+        return s.replace(", & ", " and ").replace("&", "and")
+
+    out = []
+    for i, p in enumerate(JOURNALS + CONFERENCES + THAI + PREPRINTS):
+        kind = "article" if p in JOURNALS else ("misc" if p in PREPRINTS else "inproceedings")
+        key = f"wangwiwattana{p['year']}{i}"
+        fields = [
+            ("author", authors(p["authors"])),
+            ("title", p["title"]),
+            ("year", p["year"]),
+        ]
+        if kind == "article":
+            fields.append(("journal", p["venue"]))
+        elif kind == "inproceedings":
+            booktitle, _, pages = p["venue"].partition(", pp. ")
+            fields.append(("booktitle", booktitle))
+            if pages:
+                fields.append(("pages", pages.replace("-", "--")))
+        else:
+            fields.append(("howpublished", p["venue"]))
+        if p["url"]:
+            if "doi.org/" in p["url"]:
+                fields.append(("doi", p["url"].split("doi.org/")[-1]))
+            else:
+                fields.append(("url", p["url"]))
+        body = ",\n  ".join(f"{k} = {{{v}}}" for k, v in fields)
+        out.append(f"@{kind}{{{key},\n  {body}\n}}")
+    return "\n\n".join(out) + "\n"
 
 
 def page_index() -> str:
@@ -1577,6 +1630,7 @@ def main() -> None:
     # Answer engines read llms.txt before they crawl; every major assistant
     # gets an explicit allow so a default-deny never silently hides the site.
     (SITE / "llms.txt").write_text(llms_txt(), encoding="utf-8")
+    (SITE / "assets/publications.bib").write_text(bibtex(), encoding="utf-8")
     agents = "\n\n".join(f"User-agent: {a}\nAllow: /" for a in AI_AGENTS)
     (SITE / "robots.txt").write_text(
         f"User-agent: *\nAllow: /\n\n{agents}\n\n"
