@@ -751,7 +751,7 @@ def foot_block() -> str:
       <div class="links">
         <a href="mailto:{EMAIL}">{EMAIL}</a>
         <a href="{LINKEDIN}" rel="me noopener">LinkedIn</a>
-        <a href="{YOUTUBE}" rel="me noopener">YouTube</a>
+        <a href="{YOUTUBE}" rel="me noopener">Mark Digital Academy</a>
         <a href="assets/cv.pdf">CV, PDF</a>
       </div>
     </div>
@@ -783,11 +783,18 @@ def person_jsonld() -> str:
         "url": BASE + "/",
         "image": BASE + "/assets/img/portrait-960.jpg",
         "email": "mailto:" + EMAIL,
-        "worksFor": {
-            "@type": "CollegeOrUniversity",
-            "name": "University of the Thai Chamber of Commerce",
-            "url": "https://www.utcc.ac.th/",
-        },
+        "worksFor": [
+            {
+                "@type": "CollegeOrUniversity",
+                "name": "University of the Thai Chamber of Commerce",
+                "url": "https://www.utcc.ac.th/",
+            },
+            {
+                "@type": "Organization",
+                "name": "Mark Digital Academy",
+                "url": YOUTUBE,
+            },
+        ],
         "alumniOf": [
             {"@type": "CollegeOrUniversity", "name": "Southern Methodist University"},
             {"@type": "CollegeOrUniversity", "name": "University of the Thai Chamber of Commerce"},
@@ -885,7 +892,8 @@ def page_index() -> str:
         control of their data. Eighteen years across software engineering, IT leadership and applied
         research.</p>
         <p class="now">Vice President of Information Technology and Assistant Professor at the
-        University of the Thai Chamber of Commerce.</p>
+        University of the Thai Chamber of Commerce, and founder of
+        <a href="https://www.youtube.com/@markdigitalacademy" rel="me noopener">Mark Digital Academy</a>.</p>
         <div class="actions">
           <a class="btn" href="mailto:{EMAIL}">Start a conversation</a>
           <a class="btn ghost" href="assets/cv.pdf">Download CV</a>
