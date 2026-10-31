@@ -155,7 +155,7 @@ institution can run without him.</p>
   <div><b>{n_speak}</b><small>programmes since 2018</small></div>
   <div><b>{len(projects)}</b><small>funded research projects</small></div>
   <div><b>2008</b><small>first software role</small></div>
-  <div><b>8</b><small>systems built in house</small></div>
+  <div><b>20+</b><small>systems built in house</small></div>
 </div>"""]
     engagements = ['<section><h2><span>Selected engagements</span>'
                    '<span class="n">delivered, with an outcome</span></h2>']

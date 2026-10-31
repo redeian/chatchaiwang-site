@@ -29,7 +29,7 @@ NAME_TH = "ชัชชัย หวังวิวัฒนา"
 STATS = [
     ("18", "peer-reviewed publications", "2015 to 2026"),
     ("76", "training and speaking programmes", "since 2018"),
-    ("8", "AI and software systems built in house", "at the university, running today"),
+    ("20+", "software systems built in house", "at the university, running today"),
     ("80%", "below the vendor quote", "in-house build at the university"),
 ]
 
@@ -409,8 +409,9 @@ ENGAGEMENTS = [
             "institution: a fifty-person IT organisation, 2,000 computers and 20,000 iPads, and a "
             "rebuilt digital backbone of data warehouse, cybersecurity, paperless workflow, "
             "API-first, data governance and martech.",
-            "Data protection officer under PDPA. Eight systems built in house at about a fifth of "
-            "what outside vendors quoted. No AI servers bought, compute paid for as tokens.",
+            "Data protection officer under PDPA. More than twenty systems built in house; the eight "
+            "AI ones at about a fifth of what outside vendors quoted. No AI servers bought, compute "
+            "paid for as tokens.",
             "First education institution in Asia-Pacific on Wi-Fi 7. The work led to two ACES "
             "Awards in 2026, including Premier Educational Institutions in Asia.",
         ],
