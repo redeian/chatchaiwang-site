@@ -28,8 +28,8 @@ NAME_TH = "ชัชชัย หวังวิวัฒนา"
 STATS = [
     ("18", "peer-reviewed publications", "2015 to 2026"),
     ("76", "training and speaking programmes", "since 2018"),
-    ("7", "funded research grants", "2023 to 2026, all funded"),
-    ("18", "years in software and IT", "industry and academia"),
+    ("18", "AI and data projects in production", "with Srithai Superware"),
+    ("80%", "cheaper than buying the same systems", "3 million a year against a 15 million quote"),
 ]
 
 FOCUS = [
@@ -391,29 +391,31 @@ ENGAGEMENTS = [
     dict(
         org="Srithai Superware",
         meta="AI transformation consultant &middot; 2025 to present",
-        body=(
-            "Set up their AI champion programme and the transformation that followed. Around a "
-            "hundred executives trained, then champion cohorts who went on to train the whole "
-            "factory themselves. Eighteen projects are now in production across digital, data and "
-            "AI, digital twin work included, after a hackathon and a pitch round. Their programmers "
-            "were upskilled on using AI safely and under governance."
-        ),
+        body=[
+            "Set up their AI champion programme and the transformation that followed.",
+            "Around a hundred executives trained, then champion cohorts who went on to train the "
+            "whole factory themselves.",
+            "Eighteen projects in production across digital, data and AI, digital twin work "
+            "included, after a hackathon and a pitch round. Their programmers were upskilled on "
+            "using AI safely and under governance.",
+        ],
     ),
     dict(
         org="University of the Thai Chamber of Commerce",
         meta="Vice President of Information Technology &middot; 2025 to present",
-        body=(
-            "Runs a fifty-person IT organisation and 22,000 devices, 2,000 computers and 20,000 "
-            "iPads, and rebuilt the university's digital backbone: data warehouse, cybersecurity, "
-            "paperless workflow, API-first policy, data governance, and the marketing technology "
-            "behind its digital channels. Data protection officer under PDPA. Eight of those "
-            "systems are built in house for about 3 million baht a year against roughly 15 million "
-            "quoted from outside, and AI runs on tokens rather than a data centre. First education "
-            "institution in Asia-Pacific on Wi-Fi 7. Three ACES Awards, including Premier Education "
-            "in ASEAN."
-        ),
+        body=[
+            "Fifty-person IT organisation, 2,000 computers and 20,000 iPads, and a rebuilt digital "
+            "backbone: data warehouse, cybersecurity, paperless workflow, API-first, data "
+            "governance, martech.",
+            "Data protection officer under PDPA. Eight systems built in house for about 3 million "
+            "baht a year against a vendor quote of about 15 million. No AI servers bought, compute "
+            "paid for as tokens.",
+            "First education institution in Asia-Pacific on Wi-Fi 7. Three ACES Awards, including "
+            "Premier Education in ASEAN.",
+        ],
         source=("https://e.huawei.com/en/case-studies/industries/education/"
                 "2024-university-of-the-thai-chamber-of-commerce"),
+        source_label="Source: Huawei case study, first Wi-Fi 7 education deployment in Asia-Pacific",
     ),
     dict(
         org="B.Grimm Power",
@@ -827,6 +829,18 @@ def project_span(years: str) -> tuple[int, int]:
     return (int(found[0]), int(found[-1]))
 
 
+def engagement_body(x: dict) -> str:
+    lines = x["body"] if isinstance(x["body"], list) else [x["body"]]
+    out = "".join(
+        f'<p class="venue" style="margin:0 0 11px">{e(line)}</p>' for line in lines
+    )
+    if x.get("source"):
+        label = e(x.get("source_label", "Source"))
+        out += (f'<p class="venue" style="margin:2px 0 0">'
+                f'<a class="doi" href="{x["source"]}" rel="noopener">{label}</a></p>')
+    return out
+
+
 def page_index() -> str:
     stats = "".join(
         f'<div class="stat"><b>{n}</b><span>{label}</span><i>{note}</i></div>'
@@ -842,9 +856,7 @@ def page_index() -> str:
     )
     eng = "".join(
         f'<article class="pub"><p class="meta">{x["meta"]}</p>'
-        f'<h3>{e(x["org"])}</h3><p class="venue">{e(x["body"])}'
-        + (f' <a class="doi" href="{x["source"]}" rel="noopener">Source</a>' if x.get("source") else "")
-        + "</p></article>"
+        f'<h3>{e(x["org"])}</h3>{engagement_body(x)}</article>'
         for x in ENGAGEMENTS
     )
     exp = ""
