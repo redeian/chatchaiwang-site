@@ -1058,12 +1058,10 @@ def page_index() -> str:
       <div>
         <p class="eyebrow">Bangkok, Thailand</p>
         <h1>Asst. Prof. {NAME}, Ph.D.</h1>
-        <p class="lede">I design and run the systems that let institutions use AI without losing
-        control of their data. Eighteen years across software engineering, IT leadership and applied
-        research.</p>
-        <p class="now">Vice President of Information Technology and Assistant Professor at the
-        University of the Thai Chamber of Commerce, and founder of
-        <a href="{ACADEMY}" rel="me noopener">Mark Digital Academy</a>.</p>
+        <p class="lede">AI that earns its keep is not a sandbox exercise. It scales across the whole
+        organisation, it is measured in numbers, and it runs on data that stays under your own
+        control — strengthening your people to run it themselves, so the institution moves forward
+        steadily and sustainably.</p>
         <div class="actions">
           <a class="btn" href="mailto:{EMAIL}">Start a conversation</a>
           <a class="btn ghost" href="assets/cv.pdf">Download CV</a>
