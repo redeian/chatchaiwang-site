@@ -1167,7 +1167,7 @@ def page_index() -> str:
   </section>
 </main>
 """
-    desc = ("Chatchai Wangwiwattana, Ph.D. Applied AI, data governance and digital transformation. "
+    desc = ("Chatchai Wangwiwattana, Ph.D. Applied AI and data governance. "
             "Vice President of Information Technology at UTCC, Bangkok. 18 peer-reviewed publications.")
     ld = f'<script type="application/ld+json">{person_jsonld()}</script>'
     alt = ('<link rel="alternate" hreflang="en" href="' + BASE + '/">\n'
@@ -1235,8 +1235,8 @@ def page_publications() -> str:
   </section>
 </main>
 """
-    desc = ("Peer-reviewed publications by Chatchai Wangwiwattana, Ph.D. Eighteen items from 2015 to 2026 "
-            "in ubiquitous computing, applied machine learning and AI in education, with DOIs.")
+    desc = ("Peer-reviewed publications by Chatchai Wangwiwattana, Ph.D. 18 items, 2015 to 2026, "
+            "ubiquitous computing, applied ML and AI in education, with DOIs.")
     return head("Publications — " + NAME_FULL, desc, "/publications.html",
                 f'<script type="application/ld+json">{ld}</script>') + body + foot_block()
 
@@ -1267,8 +1267,8 @@ def page_speaking() -> str:
   {blocks}
 </main>
 """
-    desc = (f"Teaching and speaking by Chatchai Wangwiwattana, Ph.D. {total} executive AI programmes, "
-            "train-the-trainer sessions and keynotes since 2018 for banks, ministries and universities.")
+    desc = (f"Teaching and speaking by Chatchai Wangwiwattana, Ph.D. {total} executive AI programmes "
+            "and keynotes since 2018 for banks, ministries and universities.")
     return head("Speaking — " + NAME_FULL, desc, "/speaking.html") + body + foot_block()
 
 
@@ -1502,7 +1502,7 @@ def page_index_th() -> str:
 </main>
 """
     desc = ("ผศ. ดร.ชัชชัย หวังวิวัฒนา ผู้เชี่ยวชาญด้าน AI และธรรมาภิบาลข้อมูล รองอธิการบดีฝ่ายเทคโนโลยี"
-            "สารสนเทศ มหาวิทยาลัยหอการค้าไทย ผลงานตีพิมพ์ 18 ชิ้น และหลักสูตรอบรม 75 หลักสูตร")
+            "สารสนเทศ มหาวิทยาลัยหอการค้าไทย ผลงานตีพิมพ์ 18 ชิ้น")
     alt = ('<link rel="alternate" hreflang="en" href="' + BASE + '/">\n'
            '<link rel="alternate" hreflang="th" href="' + BASE + '/th/">\n'
            '<link rel="alternate" hreflang="x-default" href="' + BASE + '/">\n')
