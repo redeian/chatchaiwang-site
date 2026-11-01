@@ -10,6 +10,12 @@ cd "$(dirname "$0")/.."
 PY=${PYTHON:-python3}
 export PYTEST_DISABLE_PLUGIN_AUTOLOAD=1
 
+# build_cv.py rewrites assets/cv.pdf with a new timestamp on every run. That is
+# not drift, so it is restored on every exit path, including a failing one: a
+# failed check must not leave the tree dirty, or the next run starts by calling
+# this repository's own dirt a finding.
+trap 'git checkout -- assets/cv.pdf 2>/dev/null || true' EXIT
+
 echo "== build =="
 env -u PYTHONPATH "$PY" build.py >/dev/null
 
