@@ -1,0 +1,24 @@
+name: verify
+
+# The same command a person runs before pushing, run by GitHub on every push and
+# pull request. It is here so that a change is refused by a machine even when
+# nobody is watching, and so the factory's checks and CI can never disagree
+# about what "green" means.
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install pytest==8.4.2
+      - name: build, check, behaviour tests
+        run: |
+          chmod +x ci/verify.sh
+          ./ci/verify.sh

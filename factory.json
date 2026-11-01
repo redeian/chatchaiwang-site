@@ -1,9 +1,9 @@
 {
   "checks": [
     {
-      "name": "build-check",
-      "cmd": "env -u PYTHONPATH python3 build.py >/dev/null && env -u PYTHONPATH python3 check.py && git diff --exit-code --quiet -- '*.html' && git checkout -- assets/cv.pdf",
-      "timeout": 600
+      "name": "verify",
+      "cmd": "bash ci/verify.sh",
+      "timeout": 900
     }
   ],
   "protected_paths": [
@@ -11,10 +11,12 @@
     "build_cv.py",
     "release.sh",
     "factory.json",
+    "ci/",
+    "tests/",
     ".github/",
     "CNAME",
     ".nojekyll"
   ],
-  "min_passed": 0,
-  "notes": "No pytest here, so the test counter is always zero and min_passed stays 0. The weight is carried by check.py (content invariants) plus a holdout per issue that asserts on the built HTML. build.py regenerates assets/cv.pdf with a new timestamp, so the command restores it to keep the tree clean for the factory's dirty check."
+  "min_passed": 33,
+  "notes": "ci/verify.sh is the single command: build.py, then check.py, then assert the committed html matches the build, then pytest on tests/. min_passed is the real number of behaviour tests, so a run that collects nothing cannot pass. build.py rewrites assets/cv.pdf with a new timestamp every time, so the script restores it instead of reporting drift."
 }
