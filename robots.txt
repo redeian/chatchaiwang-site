@@ -50,6 +50,6 @@ User-agent: Meta-ExternalAgent
 Allow: /
 
 # Structured index for language models
-# https://chatchaiwang.com/llms.txt
+# https://www.chatchaiwang.com/llms.txt
 
-Sitemap: https://chatchaiwang.com/sitemap.xml
+Sitemap: https://www.chatchaiwang.com/sitemap.xml

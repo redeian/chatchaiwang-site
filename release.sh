@@ -14,7 +14,7 @@ cd "$(dirname "$0")"
 PY="env -u PYTHONPATH /opt/homebrew/anaconda3/bin/python3"
 REPO="redeian/chatchaiwang-site"
 BRANCH="main"
-HOST="chatchaiwang.com"
+HOST="www.chatchaiwang.com"
 EDGE="185.199.108.153"          # any GitHub Pages A record
 PATHS=(/ /th/ /publications.html /speaking.html /llms.txt /sitemap.xml /robots.txt /assets/publications.bib)
 

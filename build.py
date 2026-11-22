@@ -15,7 +15,7 @@ import subprocess
 import sys
 
 SITE = pathlib.Path(__file__).resolve().parent
-BASE = "https://chatchaiwang.com"
+BASE = "https://www.chatchaiwang.com"
 EMAIL = "chatchai_wan@utcc.ac.th"
 LINKEDIN = "https://linkedin.com/in/chatchai-mark-wangwiwattana-ph-d-8659b230"
 YOUTUBE = "https://www.youtube.com/@markdigitalacademy"
