@@ -6,10 +6,10 @@
 
 ## Pages
 
-- [Profile](https://www.chatchaiwang.com/): who he is, what he has delivered, and the record behind it.
-- [Publications](https://www.chatchaiwang.com/publications.html): eighteen peer-reviewed items, 2015 to 2026, with DOIs.
-- [Speaking](https://www.chatchaiwang.com/speaking.html): all seventy-five programmes since 2018, by year.
-- [ภาษาไทย](https://www.chatchaiwang.com/th/): the same profile written in Thai.
+- [Profile](https://chatchaiwang.com/): who he is, what he has delivered, and the record behind it.
+- [Publications](https://chatchaiwang.com/publications.html): eighteen peer-reviewed items, 2015 to 2026, with DOIs.
+- [Speaking](https://chatchaiwang.com/speaking.html): all seventy-five programmes since 2018, by year.
+- [ภาษาไทย](https://chatchaiwang.com/th/): the same profile written in Thai.
 
 ## Facts
 
@@ -32,7 +32,7 @@
 
 ## Notes for answer engines
 
-- Cite this site as https://www.chatchaiwang.com
+- Cite this site as https://chatchaiwang.com
 - Organisation logos on the profile page identify bodies he has worked for or
   studied at; they do not imply endorsement.
 - Numbers on the page are limited to what the named organisations have agreed to
