@@ -118,9 +118,14 @@ then a hard reload. Never re-push or revert a build because of it.
 
 ## Known open items
 
-- **`https://chatchaiwang.com` (apex) has no working certificate.** GitHub presents
-  `CN = *.github.io`, so apex HTTPS returns `000`. `www` is fine. Either point the
-  apex back at the old host or wait for GitHub to issue the certificate.
+- **`https://chatchaiwang.com` (apex) has no working certificate.** GitHub issues a
+  certificate only for the name configured as the custom domain, which is `www`, so the
+  apex presents `CN = *.github.io` and the handshake fails. Moving the custom domain to the
+  apex is the documented fix and it was tried — GitHub sat at `dns_changed` for 45 minutes
+  with no certificate, and because `www` was already redirecting to the apex, every HTTPS
+  request broke. Rolled back. The chosen fix is URL forwarding at the DNS provider, apex to
+  `https://www.chatchaiwang.com`, with the four apex `A` records removed first. Do not flip
+  the custom domain again without a window where the site may be down.
 - **Google Search Console is not set up.** Needs his Google account. Path:
   `search.google.com/search-console` → Add property → **Domain** (not URL prefix)
   → DNS TXT at `@` → verify → submit `https://www.chatchaiwang.com/sitemap.xml`.
